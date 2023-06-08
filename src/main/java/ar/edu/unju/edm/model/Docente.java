@@ -16,7 +16,7 @@ public class Docente {
 	private String nombre;
 	private String apellido;
 	private Integer dni;
-	private Integer telefono;
+	private String telefono;
 	private String direccion;
 	private String materia;
 	private Integer legajo;
@@ -25,7 +25,7 @@ public class Docente {
 	public Docente() {
 	}
 
-	public Docente(Integer id_Docente, String nombre, String apellido, Integer dni, Integer telefono, String direccion,
+	public Docente(Integer id_Docente, String nombre, String apellido, Integer dni, String telefono, String direccion,
 			String materia, Integer legajo, Boolean estado) {
 		super();
 		this.id_Docente = id_Docente;
@@ -71,11 +71,11 @@ public class Docente {
 		this.dni = dni;
 	}
 
-	public Integer getTelefono() {
+	public String getTelefono() {
 		return telefono;
 	}
 
-	public void setTelefono(Integer telefono) {
+	public void setTelefono(String telefono) {
 		this.telefono = telefono;
 	}
 

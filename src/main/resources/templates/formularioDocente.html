@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<title>Registrar Docente</title>
+</head>
+<body>
+<div> <!-- FORMULARIO -->
+	<h3>Registro de Nuevo Docente</h3>
+	<form th:object="${nuevoDocente}" th:action="@{/guardarDocente}" method="post">
+		<label>Nombre:</label>
+        <input type="text" th:field="*{nombre}"/><br/>
+        <label>Apellido:</label>
+        <input type="text" th:field="*{apellido}"/><br/>
+        <label>DNI:</label>
+        <input type="number" th:field="*{dni}"/><br/>
+        <label>Número de Télefono:</label>
+        <input type="number" th:field="*{telefono}"/><br/>
+        <label>Dirección:</label>
+        <input type="text" th:field="*{direccion}"/><br/>
+        <label>Materia:</label>
+        <input type="text" th:field="*{materia}"/><br/>
+        <label>Legajo:</label>
+        <input type="number" th:field="*{legajo}"/><br/>
+        <button type="submit">Registrar</button>   
+	</form>
+</div>
+</body>
+</html>

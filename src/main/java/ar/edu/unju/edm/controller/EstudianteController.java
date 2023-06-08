@@ -1,6 +1,7 @@
 package ar.edu.unju.edm.controller;
 
 import org.apache.juli.logging.LogFactory;
+
 import org.apache.juli.logging.Log;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -28,12 +29,16 @@ public class EstudianteController {
 	
 	@GetMapping("/estudiante")
 	public ModelAndView cargarEstudiante() {
-		ModelAndView cargaEstudiante = new ModelAndView("formEstudiante");
+		ModelAndView cargaEstudiante = new ModelAndView("formularioEstudiante");
 		cargaEstudiante.addObject("nuevoEstudiante", unEstudiante);
+		
+		 char[] divisiones = {'A', 'B', 'C', 'D'};
+		 cargaEstudiante.addObject("listaDivisiones", divisiones);
+	     
 		return cargaEstudiante;
 	}
 	
-	@PostMapping("/estudianteGuardado")
+	@PostMapping("/guardarEstudiante")
 	public ModelAndView guardarEstudiante(@ModelAttribute("nuevoEstudiante") Estudiante unEstudiante ) {
 		ModelAndView listadoEstudiantes = new ModelAndView("mostrarEstudiantes");
 		

@@ -17,10 +17,10 @@ public class Estudiante {
 	private String apellido;
 	private String nombre;
 	private Integer dni;
-	private Integer telefono;
+	private String telefono;
 	private String correo;
-	private String curso;
-	private String division;
+	private short curso;
+	private char division;
 	private String direccion;
 	private Boolean estado;
 	
@@ -32,8 +32,8 @@ public class Estudiante {
 	}
 
 
-	public Estudiante(Integer id_Estudiante, String apellido, String nombre, Integer dni, Integer telefono,
-			String correo, String curso, String division, String direccion, Boolean estado) {
+	public Estudiante(Integer id_Estudiante, String apellido, String nombre, Integer dni, String telefono,
+			String correo, short curso, char division, String direccion, Boolean estado) {
 		super();
 		this.id_Estudiante = id_Estudiante;
 		this.apellido = apellido;
@@ -88,12 +88,12 @@ public class Estudiante {
 	}
 
 
-	public Integer getTelefono() {
+	public String getTelefono() {
 		return telefono;
 	}
 
 
-	public void setTelefono(Integer telefono) {
+	public void setTelefono(String telefono) {
 		this.telefono = telefono;
 	}
 
@@ -108,22 +108,22 @@ public class Estudiante {
 	}
 
 
-	public String getCurso() {
+	public short getCurso() {
 		return curso;
 	}
 
 
-	public void setCurso(String curso) {
+	public void setCurso(short curso) {
 		this.curso = curso;
 	}
 
 
-	public String getDivision() {
+	public char getDivision() {
 		return division;
 	}
 
 
-	public void setDivision(String division) {
+	public void setDivision(char division) {
 		this.division = division;
 	}
 
