@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<title>Listado Estudiantes</title>
+<link rel="stylesheet" th:href="@{/webjars/bootstrap/5.3.0/css/bootstrap.min.css}" />
+</head>
+<body>
+<h3>Listado Estudiantes</h3>
+<!-- TABLA DE DOCENTES -->
+<div class="container col-10">
+	<table class="table table-striped-columns">
+	<!-- Encabezado -->
+	<tr>
+		<th>Código</th>
+		<th>Nombre</th>
+		<th>Apellido</th>
+		<th>DNI</th>
+		<th>Télefono</th>
+		<th>Dirección</th>
+		<th>Correo</th>
+		<th>Curso</th>
+		<th>División</th>
+		<th>Edición</th>
+	</tr>
+	<tr th:each="estudiante : ${estudianteListado}">
+		<td th:text="${estudiante.id_Estudiante}"></td>
+		<td th:text="${estudiante.nombre}"></td>
+		<td th:text="${estudiante.apellido}"></td>
+		<td th:text="${estudiante.dni}"></td>
+		<td th:text="${estudiante.telefono}"></td>
+		<td th:text="${estudiante.direccion}"></td>
+		<td th:text="${estudiante.correo}"></td>
+		<td>
+	      <span th:switch="${estudiante.curso}">
+	        <span th:case="1">Primer Año</span>
+	        <span th:case="2">Segundo Año</span>
+	        <span th:case="3">Tercer Año</span>
+	        <span th:case="4">Cuarto Año</span>
+	        <span th:case="5">Quinto Año</span>
+	      </span>
+		</td>
+		<td th:text="${estudiante.division}"></td>
+		<td>
+			<button class="btn btn-primary" type="submit">Editar</button>
+			<button class="btn btn-primary" type="submit">Borrar</button>   
+		</td>
+	</tr>
+	</table>
+</div>
+<script th:src="@{/webjars/bootstrap/5.3.0/js/bootstrap.min.js}"></script>
+</body>
+</html>
