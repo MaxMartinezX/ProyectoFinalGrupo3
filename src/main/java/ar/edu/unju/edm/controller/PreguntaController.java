@@ -20,9 +20,9 @@ public class PreguntaController {
 	@Qualifier("servicioEnMySQL")
 	IPreguntaService unServicio;
 	
-	@GetMapping("/cargarPregunta")
+	@GetMapping("/pregunta")
 	public ModelAndView cargarPregunta() {
-		ModelAndView newPregunta= new ModelAndView("fomularioPregunta");
+		ModelAndView newPregunta= new ModelAndView("formularioPregunta");
 		newPregunta.addObject("nuevaPregunta", unaPregunta);
 		return newPregunta;
 	}
@@ -35,7 +35,7 @@ public class PreguntaController {
 		}catch(Exception e) {
 			
 		}
-		listadoPreguntas.addObject("listaDePreguntas", unServicio.listarPreguntas());
+		listadoPreguntas.addObject("preguntaListado", unServicio.listarPreguntas());
 		return listadoPreguntas;
 	}
 }
