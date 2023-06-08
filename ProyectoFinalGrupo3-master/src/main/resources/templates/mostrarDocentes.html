@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<title>Listado Docente</title>
+<link rel="stylesheet" th:href="@{/webjars/bootstrap/5.3.0/css/bootstrap.min.css}" />
+</head>
+<body>
+<h3>Listado Docente</h3>
+<!-- TABLA DE DOCENTES -->
+<div class="container col-10">
+	<table class="table table-striped-columns">
+	<!-- Encabezado -->
+	<tr>
+		<th>Código</th>
+		<th>Nombre</th>
+		<th>Apellido</th>
+		<th>DNI</th>
+		<th>Télefono</th>
+		<th>Dirección</th>
+		<th>Materia</th>
+		<th>Legajo</th>
+		<th>Edición</th>
+	</tr>
+	<tr th:each="docente : ${docenteListado}">
+	 	<td th:text="${docente.id_Docente}"></td>
+	  	<td th:text="${docente.nombre}"></td>
+	  	<td th:text="${docente.apellido}"></td>
+	  	<td th:text="${docente.dni}"></td>
+	 	<td th:text="${docente.telefono}"></td>
+	  	<td th:text="${docente.direccion}"></td>
+	  	<td th:text="${docente.materia}"></td>
+	  	<td th:text="${docente.legajo}"></td>
+	 	<td>
+			<button class="btn btn-primary" type="submit">Editar</button>
+			<button class="btn btn-primary" type="submit">Borrar</button> 
+		</td>
+	</tr>
+	</table>
+</div>
+<script th:src="@{/webjars/bootstrap/5.3.0/js/bootstrap.min.js}"></script>
+</body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<title>Registrar Docente</title>
+<link rel="stylesheet" th:href="@{/webjars/bootstrap/5.3.0/css/bootstrap.min.css}" />
+</head>
+<body>
+<div class="container col-6"> <!-- FORMULARIO -->
+	<h3>Registro de Nuevo Docente</h3>
+	<form th:object="${nuevoDocente}" th:action="@{/guardarDocente}" method="post">
+		<div class="mb-e">
+		    <label>Nombre:</label>
+		    <input type="text" th:field="*{nombre}" class="form-control" required/><br/>
+		</div>
+		<div class="mb-e">
+		    <label>Apellido:</label>
+		    <input type="text" th:field="*{apellido}" class="form-control" required/><br/>
+		</div>
+		<div class="mb-e">
+		    <label>DNI:</label>
+		    <input type="number" th:field="*{dni}" class="form-control" required/><br/>
+		</div>
+		<div class="mb-e">
+		    <label>Número de Télefono:</label>
+		    <input type="number" th:field="*{telefono}" class="form-control" required/><br/>
+		</div>
+		<div class="mb-e">
+		    <label>Dirección:</label>
+		    <input type="text" th:field="*{direccion}" class="form-control" required/><br/>
+		</div>
+		<div class="mb-e">
+		    <label>Materia:</label>
+		    <input type="text" th:field="*{materia}" class="form-control" required/><br/>
+		</div>
+		<div class="mb-e">
+		    <label>Legajo:</label>
+		    <input type="number" th:field="*{legajo}" class="form-control" required/><br/>
+		</div>
+		<button class="btn btn-primary" type="submit">Registrar</button>
+	</form>
+</div>
+<script th:src="@{/webjars/bootstrap/5.3.0/js/bootstrap.min.js}"></script>
+</body>
+</html>
