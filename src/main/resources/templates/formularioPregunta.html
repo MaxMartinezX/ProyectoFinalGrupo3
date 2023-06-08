@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<title>Registrar Docente</title>
+<link rel="stylesheet" th:href="@{/webjars/bootstrap/5.3.0/css/bootstrap.min.css}" />
+</head>
+<body>
+<div class="container col-6"> <!-- FORMULARIO -->
+	<h3>Registro de Nueva Pregunta</h3>
+	<div>
+	<form th:object="${nuevaPregunta}" th:action="@{/guardarPregunta}" method="post">
+	<div>
+		<div class="mb-e">
+		    <label>Pregunta:</label>
+		    <input type="text" th:field="*{pregunta}" class="form-control" required/><br/>
+		</div>
+		
+		<div class="mb-e">
+		    <label>Opción 1:</label>
+		    <input type="text" th:field="*{opcion1}" class="form-control" required/><br/>
+		</div>
+		
+		<div class="mb-e">
+		    <label>Opción 2:</label>
+		    <input type="text" th:field="*{opcion2}" class="form-control" required/><br/>
+		</div>
+		
+		<div class="mb-e">
+		    <label>Opción 3:</label>
+		    <input type="text" th:field="*{opcion3}" class="form-control" required/><br/>
+		</div>
+		
+		<div class="mb-e">
+		    <label>Opción 4:</label>
+		    <input type="text" th:field="*{opcion4}" class="form-control" required/><br/>
+		</div>
+		
+		<div class="mb-e">
+            <label class="form-label">Opción Correcta:</label>
+            <select th:field="*{opcionCorrecta}" class="form-control" required><br/>
+                <option th:value="1">Primera</option>
+                <option th:value="2">Segunda</option>
+                <option th:value="3">Tercera</option>
+                <option th:value="4">Cuarta</option>
+            </select>
+        </div>
+    </div></br>
+		<button class="btn btn-primary" type="submit">Registrar</button>
+	</form>
+</div>
+<script th:src="@{/webjars/bootstrap/5.3.0/js/bootstrap.min.js}"></script>
+</body>
+</html>
