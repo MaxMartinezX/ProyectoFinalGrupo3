@@ -8,7 +8,11 @@
 <body>
 <div class="container col-6"> <!-- FORMULARIO -->
 	<h3>Registro de Nuevo Docente</h3>
-	<form th:object="${nuevoDocente}" th:action="@{/guardarDocente}" method="post">
+	<form th:object="${nuevoDocente}" th:action="${band}?@{/modificarDocente}:@{/guardarDocente}" method="post" enctype="multipart/form-data">
+		
+		<!-- verifica que el id no cambia al modificar el formulario-->
+		<input type="hidden" class="form-control" th:if="${band}" th:field="*{codigo}">
+		
 		<div class="mb-e">
 		    <label>Nombre:</label>
 		    <input type="text" th:field="*{nombre}" class="form-control" required/><br/>
@@ -37,6 +41,13 @@
 		    <label>Legajo:</label>
 		    <input type="number" th:field="*{legajo}" class="form-control" required/><br/>
 		</div>
+		
+		<div class="mb-e">
+		    <label class="form-label" th:if="${band == false}">Foto: </label>
+		    <input class="form-control" type="file" name="file" accept="image/x-png,image/gif,image/png,image/jpeg" onchange="loadFile(event)">
+		    <img id="output" style="padding-top: 2px; width: 146px;">
+		</div>
+		
 		<button class="btn btn-primary" type="submit">Registrar</button>
 	</form>
 </div>

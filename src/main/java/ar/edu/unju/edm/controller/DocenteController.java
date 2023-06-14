@@ -5,8 +5,13 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
+
+import java.util.Base64;
 
 import org.apache.juli.logging.Log;
 import org.apache.juli.logging.LogFactory;
@@ -30,23 +35,102 @@ public class DocenteController {
 	public ModelAndView cargarDocente() {
 		ModelAndView cargaDocente = new ModelAndView("formularioDocente");
 		cargaDocente.addObject("nuevoDocente", unDocente);
+		
+		cargaDocente.addObject("band", false);
 		return cargaDocente;
 	}
 	
-	@PostMapping("/guardarDocente")
-	public ModelAndView guardarDocente(@ModelAttribute("nuevoDocente") Docente docenteNuevo){
+	@PostMapping(value ="/guardarDocente", consumes="multipart/form-data")
+	public ModelAndView guardarDocente(@ModelAttribute("nuevoDocente") Docente docenteNuevo,@RequestParam("file") MultipartFile[] archivo){
 		ModelAndView listadoDocentes = new ModelAndView("mostrarDocentes");
 		
-		GRUPO3.warn("Mostrando el nuevo producto " + docenteNuevo.getNombre());
+		//carga de la foto
+		try {
+			byte[] contenido= archivo[0].getBytes();
+			String base64= Base64.getEncoder().encodeToString(contenido);
+			docenteNuevo.setFoto(base64);
+		}catch(Exception e) {
+			listadoDocentes.addObject("cargarFotoErrorMessage", e.getMessage());
+			GRUPO3.error(e);
+		}
 		
+		
+		GRUPO3.warn("Mostrando el nuevo docente " + docenteNuevo.getNombre());
 		try {
 			unServicio.cargarDocente(docenteNuevo);
 		}catch(Exception e) {
+			listadoDocentes.addObject("cargaDocenteErrorMessage", e.getMessage());
 		}
 		
 		listadoDocentes.addObject("docenteListado",unServicio.listarDocentes());
 		
 		return listadoDocentes;
 	}
+	
+	//MODIFICAR 
+	
+	@GetMapping("/modificarDocente/{id_Docente}")
+	public ModelAndView modificarDocente(@PathVariable(name="id_Docente") Integer id) {
+		ModelAndView editarDocente = new ModelAndView("formularioDocente");
+		
+		try {
+			editarDocente.addObject("nuevoDocente",unServicio.mostrarUnDocente(id));
+		}catch(Exception e) {
+			editarDocente.addObject("modificarDocenteErrorMessage", e.getMessage());
+		}
+		
+		editarDocente.addObject("band", true);
+		
+		return editarDocente;
+	}
+	
+	@PostMapping(value ="/modificarDocente", consumes="multipart/form-data")
+	public ModelAndView modificarDocente(@ModelAttribute("nuevoDocente") Docente docenteNuevo,@RequestParam("file") MultipartFile[] archivo){
+		ModelAndView listadoDocentes = new ModelAndView("mostrarDocentes");
+		
+		//carga de la foto
+		try {
+			byte[] contenido= archivo[0].getBytes();
+			String base64= Base64.getEncoder().encodeToString(contenido);
+			docenteNuevo.setFoto(base64);
+		}catch(Exception e) {
+			listadoDocentes.addObject("cargarFotoErrorMessage", e.getMessage());
+			GRUPO3.error(e);
+		}
+		
+		
+		GRUPO3.warn("Docente modificado: " + docenteNuevo.getNombre());
+		try {
+			unServicio.cargarDocente(docenteNuevo);
+		}catch(Exception e) {
+			listadoDocentes.addObject("cargaDocenteErrorMessage", e.getMessage());
+		}
+		
+		listadoDocentes.addObject("docenteListado",unServicio.listarDocentes());
+		
+		return listadoDocentes;
+	}
+	
+	//ELIMINAR
+	
+	@GetMapping("/eliminarDocente/{id_Docente}")
+	public ModelAndView eliminarDocente(@PathVariable(name="id_Docente") Integer id) {
+		ModelAndView eliminarDocente = new ModelAndView("formularioDocente");
+		
+		try {
+			unServicio.eliminarDocente(id);
+		}catch(Exception e) {
+			eliminarDocente.addObject("eliminarDocenteErrorMessage", e.getMessage());
+		}
+		
+		try {
+			eliminarDocente.addObject("mostrarDocentes", unServicio.listarDocentes());
+		}catch(Exception e) {
+			eliminarDocente.addObject("listarDocenteErrorMessage", e.getMessage());
+		}
+		
+		return eliminarDocente;
+	}
+	
 
 }
