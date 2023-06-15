@@ -8,6 +8,11 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Lob;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Size;
 
 @Component
 @Entity
@@ -16,14 +21,25 @@ public class Docente {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id_Docente;
 	private String contraseña;
+	@NotBlank(message= "nombre is required")
+	@Size(max=40)
 	private String nombre;
+	@NotBlank(message= "apellido is required")
+	@Size(max=20)
 	private String apellido;
+	@NotNull(message= "dni is required")
 	private Integer dni;
+	@NotNull(message= "telefono is required")
+	@Pattern(regexp = "[388]+")
 	private String telefono;
 	private String direccion;
+	@NotNull(message= "localidad is required")
 	private String localidad;
+	@NotNull(message= "materia is required")
 	private String materia;
+	@Email
 	private String correo;
+	@NotNull(message= "legajo is required")
 	private Integer legajo;
 	@Lob
 	@Column(name="foto",columnDefinition="BLOB")

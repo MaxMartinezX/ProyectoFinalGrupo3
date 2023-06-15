@@ -3,6 +3,7 @@ package ar.edu.unju.edm.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -18,6 +19,7 @@ import org.apache.juli.logging.LogFactory;
 
 import ar.edu.unju.edm.model.Docente;
 import ar.edu.unju.edm.service.IDocenteService;
+import jakarta.validation.Valid;
 
 @Controller
 public class DocenteController {
@@ -41,7 +43,14 @@ public class DocenteController {
 	}
 	
 	@PostMapping(value ="/guardarDocente", consumes="multipart/form-data")
-	public ModelAndView guardarDocente(@ModelAttribute("nuevoDocente") Docente docenteNuevo,@RequestParam("file") MultipartFile[] archivo){
+	public ModelAndView guardarDocente(@Valid @ModelAttribute("nuevoDocente") Docente docenteNuevo,@RequestParam("file") MultipartFile[] archivo, BindingResult resultado ){
+		
+		if(resultado.hasErrors()) {
+			ModelAndView cargaDocente = new ModelAndView("formularioDocente");
+			cargaDocente.addObject("nuevoDocente", docenteNuevo);
+			return cargaDocente;
+		}
+		
 		ModelAndView listadoDocentes = new ModelAndView("mostrarDocentes");
 		
 		//carga de la foto
