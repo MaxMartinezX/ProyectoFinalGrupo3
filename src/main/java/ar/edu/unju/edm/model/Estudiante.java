@@ -7,6 +7,10 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 
 
 
@@ -16,18 +20,20 @@ public class Estudiante {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id_Estudiante;
-	//@NotNull
+	@NotBlank(message="apellido is required")
+	@Size(max=20)
 	private String apellido;
-	//@NotNull
+	@NotBlank(message="nombre is required")
+	@Size(max=30)
 	private String nombre;
-	//@Size(min=4, max=16, message="La contraseña debe tener entre 4 y 16 caracteres")
+	@Size(min=4, max=16, message="La contraseña debe tener entre 4 y 16 caracteres")
 	private String contrasenia;
-	//@NotNull o @NotEmpty
+	@NotNull(message="dni is required")
 	private Integer dni;
 	private String telefono;
-	//@Email
+	@Email
 	private String correo;
-	//@NotNull
+	@NotNull(message="curso is required")
 	private short curso;
 	private char division;
 	private String direccion;

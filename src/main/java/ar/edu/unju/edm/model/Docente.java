@@ -2,10 +2,12 @@ package ar.edu.unju.edm.model;
 
 import org.springframework.stereotype.Component;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Lob;
 
 @Component
 @Entity
@@ -13,38 +15,43 @@ public class Docente {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id_Docente;
+	private String contraseña;
 	private String nombre;
 	private String apellido;
 	private Integer dni;
 	private String telefono;
 	private String direccion;
+	private String localidad;
 	private String materia;
+	private String correo;
 	private Integer legajo;
+	@Lob
+	@Column(name="foto",columnDefinition="BLOB")
+	private String foto;
 	private Boolean estado;
 	
 	public Docente() {
 	}
 
-	public Docente(Integer id_Docente, String nombre, String apellido, Integer dni, String telefono, String direccion,
-			String materia, Integer legajo, Boolean estado) {
+	public Docente(String contraseña, String nombre, String apellido, Integer dni, String telefono, String direccion,
+			String localidad, String materia, String correo, Integer legajo, String foto, Boolean estado) {
 		super();
-		this.id_Docente = id_Docente;
+		this.contraseña = contraseña;
 		this.nombre = nombre;
 		this.apellido = apellido;
 		this.dni = dni;
 		this.telefono = telefono;
 		this.direccion = direccion;
+		this.localidad = localidad;
 		this.materia = materia;
+		this.correo = correo;
 		this.legajo = legajo;
+		this.foto = foto;
 		this.estado = estado;
 	}
 
 	public Integer getId_Docente() {
 		return id_Docente;
-	}
-
-	public void setId_Docente(Integer id_Docente) {
-		this.id_Docente = id_Docente;
 	}
 
 	public String getNombre() {
@@ -87,6 +94,14 @@ public class Docente {
 		this.direccion = direccion;
 	}
 
+	public String getLocalidad() {
+		return localidad;
+	}
+
+	public void setLocalidad(String localidad) {
+		this.localidad = localidad;
+	}
+
 	public String getMateria() {
 		return materia;
 	}
@@ -103,6 +118,14 @@ public class Docente {
 		this.legajo = legajo;
 	}
 
+	public String getFoto() {
+		return foto;
+	}
+
+	public void setFoto(String foto) {
+		this.foto = foto;
+	}
+
 	public Boolean getEstado() {
 		return estado;
 	}
@@ -110,5 +133,23 @@ public class Docente {
 	public void setEstado(Boolean estado) {
 		this.estado = estado;
 	}
+
+	public String getContraseña() {
+		return contraseña;
+	}
+
+	public void setContraseña(String contraseña) {
+		this.contraseña = contraseña;
+	}
+
+	public String getCorreo() {
+		return correo;
+	}
+
+	public void setCorreo(String correo) {
+		this.correo = correo;
+	}
+	
+	
 
 }

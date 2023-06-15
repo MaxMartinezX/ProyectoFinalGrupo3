@@ -20,6 +20,7 @@
 		<th>Dirección</th>
 		<th>Materia</th>
 		<th>Legajo</th>
+		<th>Foto</th>
 		<th>Edición</th>
 	</tr>
 	<tr th:each="docente : ${docenteListado}">
@@ -31,9 +32,12 @@
 	  	<td th:text="${docente.direccion}"></td>
 	  	<td th:text="${docente.materia}"></td>
 	  	<td th:text="${docente.legajo}"></td>
+	  	<td class="black">
+		      <img th:src="${'data:image/png;base64,'+docente.foto}" width="50" height="50">
+		</td>
 	 	<td>
-			<button class="btn btn-primary" type="submit">Editar</button>
-			<button class="btn btn-primary" type="submit">Borrar</button> 
+			<button class="btn btn-primary">Editar</button>
+			<button class="btn btn-primary">Borrar</button> 
 		</td>
 	</tr>
 	</table>
