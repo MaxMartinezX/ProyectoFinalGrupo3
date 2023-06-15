@@ -9,7 +9,8 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 
 @Component
@@ -21,11 +22,15 @@ public class Cuestionario {
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "id_Docente")
-	Docente docente;
+	private Docente docente;
 	
+	@NotNull(message = "PuntajeTotal is required")
 	private Integer puntajeTotal;
+	@NotBlank(message= "Pregunta1 is required ")
 	private String pregunta1;
+	@NotBlank(message= "Pregunta2 is required")
 	private String pregunta2;
+	@NotBlank(message= "Pregunta3 is required")
 	private String pregunta3;
 	private String pregunta4;
 	private String pregunta5;
