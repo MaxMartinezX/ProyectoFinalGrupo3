@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<title>Modificar Preguntas</title>
+<link rel="stylesheet" th:href="@{/webjars/bootstrap/5.3.0/css/bootstrap.min.css}" />
+</head>
+<body>
+<div class="container col-6"> <!-- FORMULARIO -->
+	<h3 th:text="'Agregando Preguntas a:' + ${editarCuestionario.idCuestionario}"></h3>
+	<div class="container col-10">
+		<table class="table table-striped-columns">
+		<tr>
+			<th>Seleccionar</th>
+			<th>Puntaje</th>
+			<th>Pregunta</th>
+			<th>Opción Correcta</th>
+			<th>Dificultad</th>
+		</tr>
+		<tr th:each="pregunta : ${preguntaListado}">
+			<td>
+				<input type="checkbox" th:name="'preguntasSeleccionadas'" th:value="${pregunta.id}">
+			</td>
+			<td>
+				<input type="number" th:name="'puntajesSeleccionados'" min="1" max="100" required>
+			</td>
+			<td th:text="${pregunta.pregunta}"></td>
+			<td>
+		      <span th:switch="${pregunta.opcionCorrecta}">
+		        <span th:case="1">Primera Opción</span>
+		        <span th:case="2">Segunda Opción</span>
+		        <span th:case="3">Tercera Opción</span>
+		        <span th:case="4">Cuarta Opción</span>
+		      </span>
+			</td>
+		</tr>
+		</table>
+	</div>
+<script th:src="@{/webjars/bootstrap/5.3.0/js/bootstrap.min.js}"></script>
+</body>
+</html>

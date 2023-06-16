@@ -33,14 +33,13 @@ private static final Log Group3 = LogFactory.getLog(CuestionarioController.class
 	public ModelAndView cargarCuestionario() {
 		ModelAndView cargaCuestionario = new ModelAndView("formularioCuestionario");
 		cargaCuestionario.addObject("nuevoCuestionario", unCuestionario);
-		cargaCuestionario.addObject("docentes", docenteService.listarDocentes());
+		cargaCuestionario.addObject("listadoDocentes", docenteService.listarDocentes());
 	     
 		return cargaCuestionario;
 	}
 	
 	@PostMapping("/guardarCuestionario")
 	public ModelAndView guardarCuestionario(@Valid @ModelAttribute("nuevoCuestionario") Cuestionario unCuestionario, BindingResult resultado ) {
-		
 		if(resultado.hasErrors()) {
 			ModelAndView cargaCuestionario = new ModelAndView("formularioCuestionario");
 			cargaCuestionario.addObject("nuevoCuestionario", unCuestionario);
@@ -57,7 +56,7 @@ private static final Log Group3 = LogFactory.getLog(CuestionarioController.class
 			listadoCuestionarios.addObject("cargarCuestionarioErrorMessage", e.getMessage());
 		}
 		
-		listadoCuestionarios.addObject("CuestionarioListado", cuestionarioService.listarCuestionarios());
+		listadoCuestionarios.addObject("cuestionarioListado", cuestionarioService.listarCuestionarios());
 		
 		return listadoCuestionarios;
 	}

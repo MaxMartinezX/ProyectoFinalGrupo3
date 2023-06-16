@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<title>Crear Cuestionario</title>
+<link rel="stylesheet" th:href="@{/webjars/bootstrap/5.3.0/css/bootstrap.min.css}" />
+</head>
+<body>
+	<div class="container col-6"> <!-- FORMULARIO -->
+	
+		<h3>Registro de Nuevo Cuestionario</h3>
+		<form th:object="${nuevoCuestionario}" th:action="@{/guardarCuestionario}" method="post">
+		<div>
+			<div class="mb-e">
+			    <label>Título del Cuestionario</label>
+			    <input type="text" th:field="*{titulo}" class="form-control" required/><br/>
+			</div>
+			<div class="mb-e">
+	            <label class="form-label">Docente Encargado</label>
+	            <select th:field="*{docente}" class="form-control" required><br/>
+	                <option value="">Seleccionar docente...</option>
+	                <option th:each="doc : ${listadoDocentes}" th:value="${doc}" th:text="${doc.nombre + ' ' + doc.apellido}"></option>
+	            </select>
+	        </div>
+	    </div></br>
+			<button class="btn btn-primary" type="submit">Crear</button>
+		</form>
+		
+	</div>
+
+<script th:src="@{/webjars/bootstrap/5.3.0/js/bootstrap.min.js}"></script>
+</body>
+</html>
