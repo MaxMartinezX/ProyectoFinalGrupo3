@@ -10,7 +10,6 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
 
 
 @Component
@@ -24,8 +23,7 @@ public class Cuestionario {
 	@JoinColumn(name = "id_Docente")
 	private Docente docente;
 	
-	@NotNull(message = "PuntajeTotal is required")
-	private Integer puntajeTotal;
+	//Pendiente por modificar preguntas
 	@NotBlank(message= "Pregunta1 is required ")
 	private String pregunta1;
 	@NotBlank(message= "Pregunta2 is required")
@@ -39,12 +37,11 @@ public class Cuestionario {
 	public Cuestionario() {
 	}
 
-	public Cuestionario(Integer id_Cuestionario, Docente docente, Integer puntajeTotal, String pregunta1,
+	public Cuestionario(Integer id_Cuestionario, Docente docente, String pregunta1,
 			String pregunta2, String pregunta3, String pregunta4, String pregunta5) {
 		super();
 		this.id_Cuestionario = id_Cuestionario;
 		this.docente = docente;
-		this.puntajeTotal = puntajeTotal;
 		this.pregunta1 = pregunta1;
 		this.pregunta2 = pregunta2;
 		this.pregunta3 = pregunta3;
@@ -66,14 +63,6 @@ public class Cuestionario {
 
 	public void setDocente(Docente docente) {
 		this.docente = docente;
-	}
-
-	public Integer getPuntajeTotal() {
-		return puntajeTotal;
-	}
-
-	public void setPuntajeTotal(Integer puntajeTotal) {
-		this.puntajeTotal = puntajeTotal;
 	}
 
 	public String getPregunta1() {

@@ -57,7 +57,7 @@ private static final Log Group3 = LogFactory.getLog(CuestionarioController.class
 			listadoCuestionarios.addObject("cargarCuestionarioErrorMessage", e.getMessage());
 		}
 		
-		listadoCuestionarios.addObject("CuestionarioListado", cuestionarioService.listarCuestionarios());
+		listadoCuestionarios.addObject("cuestionarioListado", cuestionarioService.listarCuestionarios());
 		
 		return listadoCuestionarios;
 	}
