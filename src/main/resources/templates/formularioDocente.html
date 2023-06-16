@@ -27,7 +27,11 @@
 		</div>
 		<div class="mb-e">
 		    <label>Número de Télefono:</label>
-		    <input type="number" th:field="*{telefono}" class="form-control" required/><br/>
+		    <input type="tel" th:field="*{telefono}" class="form-control" required/><br/>
+		</div>
+		<div class="mb-e">
+		    <label>Localidad:</label>
+		    <input type="text" th:field="*{localidad}" class="form-control" required/><br/>
 		</div>
 		<div class="mb-e">
 		    <label>Dirección:</label>
@@ -36,6 +40,10 @@
 		<div class="mb-e">
 		    <label>Materia:</label>
 		    <input type="text" th:field="*{materia}" class="form-control" required/><br/>
+		</div>
+				<div class="mb-e">
+		    <label>Correo:</label>
+		    <input type="email" th:field="*{correo}" class="form-control" required/><br/>
 		</div>
 		<div class="mb-e">
 		    <label>Legajo:</label>

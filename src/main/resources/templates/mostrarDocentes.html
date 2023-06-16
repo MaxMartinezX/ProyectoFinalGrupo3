@@ -17,8 +17,10 @@
 		<th>Apellido</th>
 		<th>DNI</th>
 		<th>Télefono</th>
+		<th>Localidad</th>
 		<th>Dirección</th>
 		<th>Materia</th>
+		<th>Correo</th>
 		<th>Legajo</th>
 		<th>Foto</th>
 		<th>Edición</th>
@@ -29,15 +31,17 @@
 	  	<td th:text="${docente.apellido}"></td>
 	  	<td th:text="${docente.dni}"></td>
 	 	<td th:text="${docente.telefono}"></td>
+	 	<td th:text="${docente.localidad}"></td>
 	  	<td th:text="${docente.direccion}"></td>
 	  	<td th:text="${docente.materia}"></td>
+	  	<td th:text="${docente.correo}"></td>
 	  	<td th:text="${docente.legajo}"></td>
 	  	<td class="black">
 		      <img th:src="${'data:image/png;base64,'+docente.foto}" width="50" height="50">
 		</td>
 	 	<td>
-			<button class="btn btn-primary" th:href="@{'/eliminarDocente/' + ${docente.id_Docente}">Editar</button>
-			<button class="btn btn-primary" th:href="@{'/modificarDocente/' + ${docente.id_Docente}">Borrar</button>   
+			<button class="btn btn-primary" th:href="@{'/eliminarDocente/' + ${docente.id_Docente}}">Editar</button>
+			<button class="btn btn-primary" th:href="@{'/modificarDocente/' + ${docente.id_Docente}}">Borrar</button>   
 		</td>
 	</tr>
 	</table>

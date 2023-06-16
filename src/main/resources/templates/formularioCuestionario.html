@@ -17,8 +17,9 @@
 			</div>
 			<div class="mb-e">
 	            <label class="form-label">Docente Encargado</label>
-	            <select th:field="*{docente : docentes}" class="form-control" required><br/>
-	                <option th:each="*{doc : docentes}" th:value="*{docente}" th:text="${doc.nombre + doc.apellido}">
+	            <select th:field="*{docente}" class="form-control" required><br/>
+	                <option value="">Seleccionar docente...</option>
+	                <option th:each="doc : ${listadoDocentes}" th:value="${doc}" th:text="${doc.nombre + ' ' + doc.apellido}"></option>
 	            </select>
 	        </div>
 	    </div></br>

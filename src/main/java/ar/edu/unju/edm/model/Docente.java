@@ -30,7 +30,6 @@ public class Docente {
 	@NotNull(message= "dni is required")
 	private Integer dni;
 	@NotNull(message= "telefono is required")
-	@Pattern(regexp = "[388]+")
 	private String telefono;
 	private String direccion;
 	@NotNull(message= "localidad is required")
