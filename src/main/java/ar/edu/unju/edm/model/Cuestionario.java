@@ -25,6 +25,8 @@ public class Cuestionario {
 	
 	@NotBlank(message= "titulo is required")
 	private String titulo;
+	
+	private String descripcion;
 
 	private Boolean estado;
 	
@@ -32,11 +34,12 @@ public class Cuestionario {
 	}
 
 	public Cuestionario(Integer id_Cuestionario, Docente docente,
-			@NotBlank(message = "titulo is required") String titulo, Boolean estado) {
+			@NotBlank(message = "titulo is required") String titulo, String descripcion, Boolean estado) {
 		super();
 		this.id_Cuestionario = id_Cuestionario;
 		this.docente = docente;
 		this.titulo = titulo;
+		this.descripcion = descripcion;
 		this.estado = estado;
 	}
 
@@ -62,6 +65,14 @@ public class Cuestionario {
 
 	public void setTitulo(String titulo) {
 		this.titulo = titulo;
+	}
+
+	public String getDescripcion() {
+		return descripcion;
+	}
+
+	public void setDescripcion(String descripcion) {
+		this.descripcion = descripcion;
 	}
 
 	public Boolean getEstado() {

@@ -17,7 +17,7 @@
 			<th>Opción Correcta</th>
 			<th>Dificultad</th>
 		</tr>
-		<tr th:each="pregunta : ${preguntaListado}">
+		<tr th:each="pregunta : ${listadoPreguntas}">
 			<td>
 				<input type="checkbox" th:name="'preguntasSeleccionadas'" th:value="${pregunta.id}">
 			</td>

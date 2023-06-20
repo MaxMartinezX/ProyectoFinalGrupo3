@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -26,12 +27,13 @@ public class CuesPreguntaController {
 	@Autowired
 	CuesPregunta unCuesPregunta;
 	
-	@GetMapping("/CuestionarioPregunta")
-	public ModelAndView cargarCuesPregunta() {
+	@GetMapping("/CuestionarioPregunta/{id_Cuestionario}")
+	public ModelAndView cargarCuesPregunta(@PathVariable(name="id_Cuestionario") Integer id) {
+		
 		ModelAndView unCuesP= new ModelAndView("formularioCuesPregunta");
+		
 		unCuesP.addObject("cuesPregunta", unCuesPregunta);
-		unCuesP.addObject("pregunta", preguntaService.listarPreguntas());
-		unCuesP.addObject("cuestionario", cuestionarioService.listarCuestionarios());
+		unCuesP.addObject("listadoPreguntas", preguntaService.listarPreguntas());
 		
 		return unCuesP;
 	}
