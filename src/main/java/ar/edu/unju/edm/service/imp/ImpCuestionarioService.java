@@ -1,12 +1,14 @@
 package ar.edu.unju.edm.service.imp;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import ar.edu.unju.edm.model.Cuestionario;
+import ar.edu.unju.edm.model.Pregunta;
 import ar.edu.unju.edm.repository.CuestionarioRepository;
 import ar.edu.unju.edm.service.ICuestionarioService;
 
@@ -50,9 +52,11 @@ public class ImpCuestionarioService implements ICuestionarioService {
 	}
 
 	@Override
-	public Cuestionario modificarUnCuestionario(Integer idCuestionario) {
-		// TODO Auto-generated method stub
-		return null;
+	public void agregarPreguntasAUnCuestionario(Integer idCuestionario, List<Pregunta> preguntas){
+		Optional<Cuestionario> auxiliar = Optional.of(new Cuestionario());
+		auxiliar= cuestionarioRepository.findById(idCuestionario);
+		auxiliar.get().setPreguntas(preguntas);
+		cuestionarioRepository.save(auxiliar.get());
 	}
 
 }

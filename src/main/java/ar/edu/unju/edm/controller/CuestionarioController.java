@@ -7,10 +7,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import ar.edu.unju.edm.model.Cuestionario;
+import ar.edu.unju.edm.service.ICuesPreguntaService;
 import ar.edu.unju.edm.service.ICuestionarioService;
 import ar.edu.unju.edm.service.IDocenteService;
 import jakarta.validation.Valid;
@@ -18,7 +20,7 @@ import jakarta.validation.Valid;
 @Controller
 public class CuestionarioController {
 	
-private static final Log Group3 = LogFactory.getLog(CuestionarioController.class);
+ private static final Log GRUPO3 = LogFactory.getLog(CuestionarioController.class);
 	
 	
 	@Autowired
@@ -28,6 +30,8 @@ private static final Log Group3 = LogFactory.getLog(CuestionarioController.class
 	ICuestionarioService cuestionarioService;
 	@Autowired
 	IDocenteService docenteService;
+	@Autowired
+	ICuesPreguntaService cuesPreguntaService;
 	
 	@GetMapping("/cuestionario")
 	public ModelAndView cargarCuestionario() {
@@ -48,7 +52,7 @@ private static final Log Group3 = LogFactory.getLog(CuestionarioController.class
 		
 		ModelAndView listadoCuestionarios = new ModelAndView("mostrarCuestionarios");
 		
-			Group3.warn("Mostrando nuevo Cuestionario"+unCuestionario.getId_Cuestionario());
+			GRUPO3.warn("Mostrando nuevo Cuestionario"+unCuestionario.getId_Cuestionario());
 		
 		try {
 			cuestionarioService.cargarCuestionario(unCuestionario);
@@ -60,5 +64,48 @@ private static final Log Group3 = LogFactory.getLog(CuestionarioController.class
 		
 		return listadoCuestionarios;
 	}
+	
+	@GetMapping("/listadoCuestionarios")
+	public ModelAndView mostrarCuestionarios(){
+		
+		ModelAndView listadoCuestionarios = new ModelAndView("mostrarCuestionarios");
+		listadoCuestionarios.addObject("cuestionarioListado", cuestionarioService.listarCuestionarios());
+		
+		return listadoCuestionarios;
+	}
+	
+	//CUESTIONARIO CON PREGUNTAS
+	
+	@PostMapping("/cuestionarioConPreguntas/{id_Cuestionario}")
+	public ModelAndView guardarCuestionarioConPreguntas(@PathVariable(name="id_Cuestionario") Integer id) {
+		
+		ModelAndView listadoCuestionarios = new ModelAndView("mostrarCuestionarios");
+		
+		GRUPO3.warn("Cuestionario con preguntas: " + unCuestionario.getTitulo());
+		try {
+			cuestionarioService.agregarPreguntasAUnCuestionario(id, cuesPreguntaService.ListarPreguntasDeUnCuestionario(id));
+		}catch(Exception e) {
+			listadoCuestionarios.addObject("cargaCuestionarioConPreguntasErrorMessage", e.getMessage());
+		}
+		
+		listadoCuestionarios.addObject("cuestionarioListado", cuestionarioService.listarCuestionarios());
+		
+		return listadoCuestionarios;
+	}
+	
+	//RESOLVER CUESTIONARIO
+	
+	@GetMapping("/resolverCuestionario")
+	public ModelAndView resolverCuestionario() {
+	     
+		return null;
+	}
+	
+	
+	
+	
+	
+	
+	
 
 }
