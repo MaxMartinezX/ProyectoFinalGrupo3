@@ -7,7 +7,7 @@
 </head>
 <body>
 <div class="container col-6"> <!-- FORMULARIO -->
-	<h3>Registro de Nueva Pregunta</h3>
+	<h3>Registro Nueva Pregunta</h3>
 	<div>
 	<form th:object="${nuevaPregunta}" th:action="@{/guardarPregunta}" method="post">
 	<div>
@@ -17,32 +17,42 @@
 		</div>
 		
 		<div class="mb-e">
-		    <label>Opción 1:</label>
+		    <label>Opción 1</label>
 		    <input type="text" th:field="*{opcion1}" class="form-control" required/><br/>
 		</div>
 		
 		<div class="mb-e">
-		    <label>Opción 2:</label>
+		    <label>Opción 2</label>
 		    <input type="text" th:field="*{opcion2}" class="form-control" required/><br/>
 		</div>
 		
 		<div class="mb-e">
-		    <label>Opción 3:</label>
+		    <label>Opción 3</label>
 		    <input type="text" th:field="*{opcion3}" class="form-control" required/><br/>
 		</div>
 		
 		<div class="mb-e">
-		    <label>Opción 4:</label>
+		    <label>Opción 4</label>
 		    <input type="text" th:field="*{opcion4}" class="form-control" required/><br/>
 		</div>
 		
 		<div class="mb-e">
-            <label class="form-label">Opción Correcta:</label>
+            <label class="form-label">Opción Correcta</label>
             <select th:field="*{opcionCorrecta}" class="form-control" required><br/>
                 <option th:value="1">Primera</option>
                 <option th:value="2">Segunda</option>
                 <option th:value="3">Tercera</option>
                 <option th:value="4">Cuarta</option>
+            </select>
+        </div>
+        
+        <div class="mb-e">
+            <label class="form-label">Dificultad</label>
+            <select th:field="*{dificultad}" class="form-control" required><br/>
+                <option th:value="1">Fácil</option>
+                <option th:value="2">Intermedio</option>
+                <option th:value="3">Díficil</option>
+                <option th:value="4">Imposible</option>
             </select>
         </div>
     </div></br>
