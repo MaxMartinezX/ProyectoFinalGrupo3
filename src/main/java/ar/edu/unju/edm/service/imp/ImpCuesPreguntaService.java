@@ -12,6 +12,7 @@ import ar.edu.unju.edm.model.Cuestionario;
 import ar.edu.unju.edm.model.Pregunta;
 import ar.edu.unju.edm.repository.CuesPreguntaRepository;
 import ar.edu.unju.edm.repository.CuestionarioRepository;
+import ar.edu.unju.edm.repository.PreguntaRepository;
 import ar.edu.unju.edm.service.ICuesPreguntaService;
 
 @Service
@@ -22,6 +23,8 @@ public class ImpCuesPreguntaService implements ICuesPreguntaService{
 	CuesPreguntaRepository cuesPreguntaRepository;
 	@Autowired
 	CuestionarioRepository cuestionarioRepository;
+	@Autowired
+	PreguntaRepository preguntaRepository;
 	
 	@Override
 	public void cargarCuesPregunta(CuesPregunta cuesPregunta) {
@@ -30,10 +33,10 @@ public class ImpCuesPreguntaService implements ICuesPreguntaService{
 	}
 	
 	@Override
-	public void cargarPreguntasACuestionario (List<Pregunta> preguntasSeleccionadas,List<Integer> puntajesSeleccionados, Integer id_Cuestionario){
+	public void cargarPreguntasACuestionario (List<Integer> preguntasSeleccionadas,List<Integer> puntajesSeleccionados, Integer id_Cuestionario){
 		for(int i=0;i<preguntasSeleccionadas.size();i++) {
 			CuesPregunta auxiliar= new CuesPregunta();
-			auxiliar.setPregunta(preguntasSeleccionadas.get(i));
+			auxiliar.setPregunta(preguntaRepository.findById(preguntasSeleccionadas.get(i)).get());
 			auxiliar.setPuntaje(puntajesSeleccionados.get(i));
 			auxiliar.setCuestionario(cuestionarioRepository.findById(id_Cuestionario).get());
 			
