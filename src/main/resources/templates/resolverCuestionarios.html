@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<title>Resolver Cuestionario</title>
+<link rel="stylesheet" th:href="@{/webjars/bootstrap/5.3.0/css/bootstrap.min.css}" />
+</head>
+<body>
+<h3>Cuestionario</h3>
+<form th:object="${nuevoCuestionario}" th:action="@{/cuestionarioResuelto}" method="post">
+<select th:each="pregunta : ${preguntaListado}" name="respuestas">
+	<option value="&{pregunta.opcion1}" th:text="&{pregunta.opcion1}"></option>
+	<option value="&{pregunta.opcion2}" th:text="&{pregunta.opcion2}"></option>
+	<option value="&{pregunta.opcion3}" th:text="&{pregunta.opcion3}"></option>
+	<option value="&{pregunta.opcion4}" th:text="&{pregunta.opcion4}"></option>
+</select>
+	<input type="submit" value="Enviar">
+</form>
+
+<script th:src="@{/webjars/bootstrap/5.3.0/js/bootstrap.min.js}"></script>
+</body>
+</html>
