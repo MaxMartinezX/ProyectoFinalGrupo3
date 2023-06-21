@@ -12,6 +12,6 @@ public interface ICuesPreguntaService {
 	public ArrayList<CuesPregunta> mostrarTodosCuesPregunta();
 	public CuesPregunta mostrarUnCuesPregunta(Integer idCuesPregunta);
 	public CuesPregunta modificarUnCuesPregunta (Integer idCuesPregunta);
-	public void cargarPreguntasACuestionario (List<Pregunta> preguntasSeleccionadas,List<Integer> puntajesSeleccionados, Integer id_Cuestionario);
+	public void cargarPreguntasACuestionario (List<Integer> preguntasSeleccionadas,List<Integer> puntajesSeleccionados, Integer id_Cuestionario);
 	public List<Pregunta> ListarPreguntasDeUnCuestionario(Integer id_Cuestionario);
 }

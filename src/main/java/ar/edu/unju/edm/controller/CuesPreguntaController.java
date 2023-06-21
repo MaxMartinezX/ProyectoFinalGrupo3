@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import ar.edu.unju.edm.model.CuesPregunta;
-import ar.edu.unju.edm.model.Pregunta;
 import ar.edu.unju.edm.service.ICuesPreguntaService;
 import ar.edu.unju.edm.service.ICuestionarioService;
 import ar.edu.unju.edm.service.IPreguntaService;
@@ -40,7 +39,7 @@ public class CuesPreguntaController {
 	}
 	
 	@PostMapping("/guardarCuestionarioPregunta/{id_Cuestionario}")
-	public String guardarCuesPregunta(@ModelAttribute("cuesPregunta") CuesPregunta CuestionarioP, @RequestParam("preguntasSeleccionada") List<Pregunta> preguntasSeleccionadas, @RequestParam("puntajesSeleccionados") List<Integer> puntajesSeleccionados, @PathVariable(name="id_Cuestionario") Integer id) {
+	public String guardarCuesPregunta(@ModelAttribute("cuesPregunta") CuesPregunta CuestionarioP, @RequestParam("preguntasSeleccionada") List<Integer> preguntasSeleccionadas, @RequestParam("puntajesSeleccionados") List<Integer> puntajesSeleccionados, @PathVariable(name="id_Cuestionario") Integer id) {
 		
 		
 	  cuesPreguntaService.cargarPreguntasACuestionario(preguntasSeleccionadas, puntajesSeleccionados, id);
