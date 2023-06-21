@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<body>
+	<nav th:fragment="header" class="navbar navbar-expand-lg bg-primary sticky-top mb-3">
+	  <div class="container-fluid">
+	    <a class="navbar-brand" th:href="@{/home}">
+	      <img th:src="@{/images/LogoResolve.png}" alt="Reverse" height="45">
+	    </a>
+	    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+	      <span class="navbar-toggler-icon"></span>
+	    </button>
+	    <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+	      <ul class="navbar-nav ms-auto">
+	        <li class="nav-item dropdown">
+	          <a class="nav-link dropdown-toggle" href="#" id="cuestionariosDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+	            Cuestionarios
+	          </a>
+	          <ul class="dropdown-menu" aria-labelledby="cuestionariosDropdown">
+	            <li><a class="dropdown-item" th:href="@{/cuestionario}">Lista de Cuestionarios</a></li>
+	            <li><a class="dropdown-item" th:href="@{/formularioPregunta}">Crear Cuestionario</a></li>
+	            <li><a class="dropdown-item" th:href="@{/pregunta}">Lista de Preguntas</a></li>
+	          </ul>
+	        </li>
+	        <li class="nav-item">
+	          <a class="nav-link" th:href="@{/docente}">Docentes</a>
+	        </li>
+	        <li class="nav-item">
+	          <a class="nav-link" th:href="@{/estudiante}">Estudiantes</a>
+	        </li>
+	      </ul>
+	      <button class="btn btn-secondary" type="button">Iniciar Sesión</button>
+	    </div>
+	  </div>
+	</nav>
+	
+	<footer th:fragment="footer" class="absolute-bottom">
+		<img class="redes" src="images/instagram.png" alt="Instagram">
+		<img class="redes" src="images/facebook.png" alt="Facebook">
+		<h4>ClownTus</h4>
+		<p class="copy">Copyright@ ClownTus Inc.</p>
+		<a class="enlace" href="https://github.com/MaxMartinezX/TP03Grupo3" target="_blank">Repositorio de GitHub</a>
+	</footer>
+	
+</body>
+</html>
