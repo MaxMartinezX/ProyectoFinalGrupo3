@@ -6,6 +6,7 @@ import org.apache.juli.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -14,6 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import ar.edu.unju.edm.model.Estudiante;
 import ar.edu.unju.edm.service.IEstudianteService;
+import jakarta.validation.Valid;
 
 @Controller
 public class EstudianteController {
@@ -41,13 +43,20 @@ public class EstudianteController {
 	}
 	
 	@PostMapping("/guardarEstudiante")
-	public ModelAndView guardarEstudiante(@ModelAttribute("nuevoEstudiante") Estudiante unEstudiante ) {
+	public ModelAndView guardarEstudiante(@Valid @ModelAttribute("nuevoEstudiante") Estudiante nEstudiante, BindingResult resultado) {
+		
+		if(resultado.hasErrors()) {
+			ModelAndView cargaEstudiante = new ModelAndView("formularioEstudiante");
+			cargaEstudiante.addObject("nuevoEstudiante", nEstudiante);
+			return cargaEstudiante;
+		}
+		
 		ModelAndView listadoEstudiantes = new ModelAndView("mostrarEstudiantes");
 		
-			Group3.warn("Mostrando nuevo Estudiante"+unEstudiante.getNombre());
+			Group3.warn("Mostrando nuevo Estudiante"+nEstudiante.getNombre());
 		
 		try {
-			unServicio.cargarEstudiante(unEstudiante);
+			unServicio.cargarEstudiante(nEstudiante);
 		}catch(Exception e) {
 			listadoEstudiantes.addObject("CargadoEstudianteErrorMessage", e.getMessage());
 		}
