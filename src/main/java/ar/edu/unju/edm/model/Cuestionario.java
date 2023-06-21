@@ -1,6 +1,5 @@
 package ar.edu.unju.edm.model;
 
-import java.util.List;
 
 import org.springframework.stereotype.Component;
 
@@ -29,8 +28,6 @@ public class Cuestionario {
 	private String titulo;
 	
 	private String descripcion;
-	
-	private List<Pregunta> preguntas;
 
 	private Boolean estado;
 	
@@ -87,13 +84,5 @@ public class Cuestionario {
 		this.estado = estado;
 	}
 
-	public List<Pregunta> getPreguntas() {
-		return preguntas;
-	}
-
-	public void setPreguntas(List<Pregunta> preguntas) {
-		this.preguntas = preguntas;
-	}
-	
 	
 }
