@@ -2,11 +2,11 @@
 <html lang="es" xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="utf-8">
-<title>Listado Estudiantes</title>
+<title>Listado Preguntas</title>
 <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.3.0/css/bootstrap.min.css}" />
 </head>
 <body>
-<h3>Listado Estudiantes</h3>
+<h3>Listado Preguntas</h3>
 <!-- TABLA DE DOCENTES -->
 <div class="container col-10">
 	<table class="table table-striped-columns">
@@ -19,6 +19,7 @@
 		<th>Opción 3</th>
 		<th>Opción 4</th>
 		<th>Opción Correcta</th>
+		<th>Dificultad</th>
 		<th>Editar</th>
 	</tr>
 	<tr th:each="pregunta : ${preguntaListado}">
@@ -34,6 +35,14 @@
 	        <span th:case="2">Segunda Opción</span>
 	        <span th:case="3">Tercera Opción</span>
 	        <span th:case="4">Cuarta Opción</span>
+	      </span>
+		</td>
+		<td>
+	      <span th:switch="${pregunta.dificultad}">
+	        <span th:case="1">Fácil</span>
+	        <span th:case="2">Intermedio</span>
+	        <span th:case="3">Díficil</span>
+	        <span th:case="4">Imposible</span>
 	      </span>
 		</td>
 		<td>

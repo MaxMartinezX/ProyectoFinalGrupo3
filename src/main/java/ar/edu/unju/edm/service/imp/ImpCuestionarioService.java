@@ -49,10 +49,4 @@ public class ImpCuestionarioService implements ICuestionarioService {
 		
 	}
 
-	@Override
-	public Cuestionario modificarUnCuestionario(Integer idCuestionario) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 }

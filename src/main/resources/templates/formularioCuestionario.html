@@ -6,20 +6,23 @@
 <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.3.0/css/bootstrap.min.css}" />
 </head>
 <body>
-	<div class="container col-6"> <!-- FORMULARIO -->
-	
-		<h3>Registro de Nuevo Cuestionario</h3>
+	<div class="container col-lg-6 mx-auto p-4 rounded-5 bg-secondary bg-opacity-10"> <!-- FORMULARIO -->
+		<h4>Crear Cuestionario</h4>
 		<form th:object="${nuevoCuestionario}" th:action="@{/guardarCuestionario}" method="post">
 		<div>
 			<div class="mb-e">
-			    <label>Título del Cuestionario</label>
+			    <label>Título</label>
 			    <input type="text" th:field="*{titulo}" class="form-control" required/><br/>
+			</div>
+			<div class="mb-e">
+			    <label>Descripción</label>
+			    <textarea type="text" th:field="*{descripcion}" class="form-control" rows="3" required></textarea><br/>
 			</div>
 			<div class="mb-e">
 	            <label class="form-label">Docente Encargado</label>
 	            <select th:field="*{docente}" class="form-control" required><br/>
 	                <option value="">Seleccionar docente...</option>
-	                <option th:each="doc : ${listadoDocentes}" th:value="${doc}" th:text="${doc.nombre + ' ' + doc.apellido}"></option>
+	                <option th:each="doc : ${listadoDocentes}" th:value="${doc.id_Docente}" th:text="${doc.nombre + ' ' + doc.apellido}"></option>
 	            </select>
 	        </div>
 	    </div></br>
