@@ -83,7 +83,7 @@ public class CuestionarioController {
 		
 		GRUPO3.warn("Cuestionario con preguntas: " + unCuestionario.getTitulo());
 		try {
-			cuestionarioService.agregarPreguntasAUnCuestionario(id, cuesPreguntaService.ListarPreguntasDeUnCuestionario(id));
+			listadoCuestionarios.addObject("preguntas", cuesPreguntaService.ListarPreguntasDeUnCuestionario(id));
 		}catch(Exception e) {
 			listadoCuestionarios.addObject("cargaCuestionarioConPreguntasErrorMessage", e.getMessage());
 		}
