@@ -1,6 +1,7 @@
 package ar.edu.unju.edm.model;
 
 
+import java.time.LocalDate;
 import java.util.Date;
 
 import org.springframework.stereotype.Component;
@@ -32,7 +33,7 @@ public class CuesEstudiante {
 	@NotNull(message="Puntaje Obtenido is required")
 	private int puntajeObtenido;
 	@NotNull(message="FechaRealizada is required")
-	private Date fechaRealizada;
+	private String fechaRealizada;
 	private Boolean estado;
 	
 	public CuesEstudiante() {
@@ -80,12 +81,12 @@ public class CuesEstudiante {
 	}
 
 
-	public Date getFechaRealizada() {
+	public String getFechaRealizada() {
 		return fechaRealizada;
 	}
 
 
-	public void setFechaRealizada(Date fechaRealizada) {
+	public void setFechaRealizada(String fechaRealizada) {
 		this.fechaRealizada = fechaRealizada;
 	}
 

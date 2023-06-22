@@ -15,7 +15,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import ar.edu.unju.edm.model.CuesEstudiante;
+import ar.edu.unju.edm.repository.CuesEstudianteRepository;
 import ar.edu.unju.edm.service.ICuesEstudianteService;
+import ar.edu.unju.edm.service.ICuesPreguntaService;
 import ar.edu.unju.edm.service.ICuestionarioService;
 import ar.edu.unju.edm.service.IEstudianteService;
 import jakarta.validation.Valid;
@@ -35,29 +37,23 @@ public class CuesEstudianteController {
 	ICuestionarioService cuestionarioService;
 	
 	@Autowired
+	ICuesPreguntaService cuesPreguntasService;
+	
+	@Autowired
 	CuesEstudiante unCuesEstudiante;
 	
-	/*
-	@GetMapping("/elegirCuestionarioE")
+	
+	@GetMapping("/elegirCuestionario")
 	public ModelAndView cargarCuesEstudiante () {
-		ModelAndView cargaCuesEstudiante = new ModelAndView("formularioCuesEstudiante");
-		cargaCuesEstudiante.addObject("nuevoCuesEstud", unCuesEstudiante);
-		cargaCuesEstudiante.addObject("estudiante", estudianteService.listarEstudiantes());
-		cargaCuesEstudiante.addObject("cuestionario", cuestionarioService.listarCuestionarios());
+		ModelAndView cargaCuesEstudiante = new ModelAndView("mostrarCuestionariosAEstudiantes");
+		cargaCuesEstudiante.addObject("cuestionarios", cuestionarioService.listarCuestionarios());
 		
 		return cargaCuesEstudiante;
 	}
-	*/
+	
 	/*
 	@PostMapping("/guardarCuestionarioEARealizar")
-	public ModelAndView guardarCuesEstudiante (@Valid @ModelAttribute("cuesEstudiante") CuesEstudiante cuestionarioHecho, BindingResult resultado) {
-		
-		if(resultado.hasErrors()) {
-			ModelAndView cargaCuesEstudiante = new ModelAndView("formularioCuesEstudiante");
-			cargaCuesEstudiante.addObject("nuevoCuesEstud", cuestionarioHecho);
-			
-			return cargaCuesEstudiante;
-		}
+	public ModelAndView guardarCuesEstudiante ( @ModelAttribute("cuesEstudiante") CuesEstudiante cuestionarioHecho) {
 		
 		ModelAndView listadoCuesEstudiante = new ModelAndView("mostrarCuesEstudiante");
 		
@@ -73,32 +69,44 @@ public class CuesEstudianteController {
 	}
 	*/
 	
+	
 	//El Estudiante resuelve el cuestionario
-	@GetMapping("/resolverCuestionarioE/{id_Cuestionario}")
+	
+	@GetMapping("/resolverCuestionarios/{id_Cuestionario}")
 	public ModelAndView resolverCuesEstudiante(@PathVariable(name="id_Cuestionario")  Integer idCuesElegido) {
 		ModelAndView resolverCuestionario = new ModelAndView("resolverCuestionarios");
-		try {
-			resolverCuestionario.addObject("nuevoCuestionario", cuestionarioService.mostrarUnCuestionario(idCuesElegido));
-		}catch(Exception e) {
-			resolverCuestionario.addObject("CargandoCuestionarioErrorMessaje", e.getMessage());
-		}
+			
+			resolverCuestionario.addObject("nuevoCuesEstud", unCuesEstudiante);
+			resolverCuestionario.addObject("listadoEstudiantes", estudianteService.listarEstudiantes());
+			
+			resolverCuestionario.addObject("cuestionario", cuestionarioService.mostrarUnCuestionario(idCuesElegido));
+			resolverCuestionario.addObject("preguntas", cuesPreguntasService.ListarPreguntasDeUnCuestionario(idCuesElegido));
+			
 				
 		return resolverCuestionario;
 	}
 	
+	
+	
 	//Guardar las respuestas del cuestionario
-	@PostMapping("/cuestionarioResuelto/{id_cuestionario}")
-	public String guardarCuestionarioERealizado(@ModelAttribute("cuesEstudiante") CuesEstudiante cuestionarioE,
-			@RequestParam("respuestasSeleccionadas") List<String> seleccionadas,
-			@PathVariable ) 
+	@PostMapping("/resultadoDeCuestionario/{id_Cuestionario}")
+	public ModelAndView guardarCuestionarioERealizado(@ModelAttribute("cuesEstudiante") CuesEstudiante cuesEstudianteConDatos,
+			@RequestParam("respuestasSeleccionadas") List<Integer> seleccionadas, @PathVariable(name="id_Cuestionario") Integer idCuestionario ) { 
 		
-		// descomponer el array y calcular puntaje
+		ModelAndView resultadoCuestionario = new ModelAndView("resultadoCuestionario");
 		
-		//guardar el puntaje calculado en el campo puntajeObtenido
+		try {
+			
+			cuesEstudianteConDatos.setFechaRealizada(cuesEstudianteService.fechaActual());
+			cuesEstudianteConDatos.setPuntajeObtenido(cuesEstudianteService.calcularPuntajeObtenido(cuesPreguntasService.ListarRespuestasDePreguntas(idCuestionario), seleccionadas, cuesPreguntasService.ListadoDePuntajes(idCuestionario)));
 		
-		// hacer lago para que el usuario no pueda volver a realizar de nuevo el cuestionario --> id_cuestionario
-		
-		return "redirect:";
+			cuesEstudianteService.cargarCuesEstudiante(cuesEstudianteConDatos);
+			
+		}catch(Exception e) {
+			resultadoCuestionario.addObject("GuardarCuesEstudianteErrorMessage", e.getMessage());
+		}
+			
+		return resultadoCuestionario;
 	}
 	
 }
