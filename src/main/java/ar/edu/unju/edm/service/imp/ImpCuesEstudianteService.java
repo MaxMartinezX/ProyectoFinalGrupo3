@@ -57,6 +57,7 @@ public class ImpCuesEstudianteService implements ICuesEstudianteService {
 	}
 
 	@Override
+
 	public String fechaActual() {
 		LocalDate fechaActual = LocalDate.now();
 		String fechaString = fechaActual.toString();

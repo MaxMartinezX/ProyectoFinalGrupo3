@@ -14,9 +14,9 @@
 
 		<form th:object="${nuevoDocente}" th:action="${band}?@{/modificarDocente}:@{/guardarDocente}" method="post" enctype="multipart/form-data">
 		<div class="row g-3">
-			<!-- verifica que el id no cambia al modificar el formulario-->
-			<input type="hidden" class="form-control" th:if="${band}" th:field="*{codigo}">
-				
+		
+			<input type="hidden" class="form-control" th:if="${band}" th:field="*{id_Docente}">
+			
 				<div class="col-md-6">
 				    <label for="nombreID" class="form-label">Nombre</label>
 				    <input type="text" class="form-control" id="nombreID" title="Ingresa un nombre valido, sin números o caracteres especiales." pattern="[A-Za-z\s]+" th:field="*{nombre}" required>

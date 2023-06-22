@@ -9,11 +9,14 @@
 <div th:replace="~{layout :: header}"></div>
 <div class="container col-6">
 	<h3>Registro de Nuevo Estudiante</h3>
-    <form th:object="${nuevoEstudiante}" th:action="@{/guardarEstudiante}" method="post">
+    <form th:object="${nuevoEstudiante}" th:action="${band}?@{/modificarEstudiante}:@{/guardarEstudiante}" method="post">
+        
+        <input type="hidden" class="form-control" th:if="${band}" th:field="*{id_Estudiante}">
+				
         <div class="mb-e">
             <label class="form-label" for="fnombre">Nombre:</label>
-            <input type="text" th:field="*{nombre}" class="form-control" required/><br/>
-        </div>
+            <input type="text" class="form-control" id="nombreID" title="Ingresa un nombre valido, sin números o caracteres especiales." pattern="[A-Za-z\s]+" th:field="*{nombre}" required>
+		 </div>
         
         <div class="mb-e">
             <label class="form-label" for="fapellido">Apellido:</label>
@@ -22,13 +25,13 @@
         
         <div class="mb-e">
             <label class="form-label" for="fdni">DNI:</label>
-            <input type="number" th:field="*{dni}" class="form-control" required/><br/>
-        </div>
+     		<input type="number" class="form-control" id="dniID" th:field="*{dni}" min="1000000" max="99999999" title="Ingresa un número de 8 digitos." required>
+		 </div>
         
         <div class="mb-e">
             <label class="form-label" for="ftelefono">Número de Télefono:</label>
-            <input type="text" th:field="*{telefono}" class="form-control" required/><br/>
-        </div>
+            <input type="tel" class="form-control" id="telID" th:field="*{telefono}" pattern="\d{10}" title="Ingresa un número de 10 dígitos." required>		    
+		</div>
         
         <div class="mb-e">
             <label class="form-label" for="fdireccion">Dirección:</label>
@@ -37,12 +40,12 @@
         
         <div class="mb-e">
             <label class="form-label" for="fcorreo">Correo:</label>
-            <input type="text" th:field="*{correo}" class="form-control" required/><br/>
+            <input type="email" th:field="*{correo}" class="form-control" required/><br/>
         </div>
         
         <div class="mb-e">
             <label class="form-label" for="fcurso">Curso:</label>
-            <select th:field="*{curso}" class="form-control" required><br/>
+            <select th:field="*{curso}" class="form-control" required>
                 <option th:value="1">Primer Año</option>
                 <option th:value="2">Segundo Año</option>
                 <option th:value="3">Tercer Año</option>
@@ -53,9 +56,9 @@
         
         <div class="mb-e">
             <label class="form-label">División:</label><br/>
-            <div th:each="opcion : ${listaDivisiones}" class="form-check form-check-inline" required><br/>
+            <div th:each="opcion : ${listaDivisiones}" class="form-check form-check-inline" ><br/>
                 <label class="form-check-label" th:for="'opcion' + ${opcion}" th:text="${opcion}"></label>
-                <input class="form-check-input" type="radio" th:id="'opcion' + ${opcion}" th:name="division" th:field="*{division}" th:value="${opcion}"/>
+                <input class="form-check-input" type="radio" th:id="'opcion' + ${opcion}" th:name="division" th:field="*{division}" th:value="${opcion}" required/>
             </div>
         </div><br/>
         <div class="mb-e">

@@ -40,9 +40,11 @@
 	  	<td class="black">
 		      <img th:src="${'data:image/png;base64,'+docente.foto}" width="50" height="50">
 		</td>
-	 	<td>
-			<button class="btn btn-primary" th:href="@{'/eliminarDocente/' + ${docente.id_Docente}}">Editar</button>
-			<button class="btn btn-primary" th:href="@{'/modificarDocente/' + ${docente.id_Docente}}">Borrar</button>   
+	 	
+		<td>
+			<a th:href="@{|/eliminarDocente/${docente.id_Docente}|}" href="#" class="btn btn-primary">Borrar</a>
+				
+			<a th:href="@{'/modificarDocente/'+${docente.id_Docente}}" href="#" class="btn btn-primary" >Editar</a>
 		</td>
 	</tr>
 	</table>

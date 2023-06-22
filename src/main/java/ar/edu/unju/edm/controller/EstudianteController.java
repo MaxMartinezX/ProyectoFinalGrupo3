@@ -74,11 +74,14 @@ public class EstudianteController {
 		ModelAndView modificaEstudiante = new ModelAndView("formularioEstudiante");
 	
 		try {
-			modificaEstudiante.addObject("estudianteModificar", unServicio.mostrarUnEstudiante(id_Est));
+			modificaEstudiante.addObject("nuevoEstudiante", unServicio.mostrarUnEstudiante(id_Est));
 		}catch(Exception e) {
 			modificaEstudiante.addObject("modificarEstudianteErrorMessage", e.getMessage());
 		}
 		
+		 char[] divisiones = {'A', 'B', 'C', 'D'};
+		 modificaEstudiante.addObject("listaDivisiones", divisiones);
+		 
 		modificaEstudiante.addObject("band", true);
 		return modificaEstudiante;
 	}
@@ -87,7 +90,7 @@ public class EstudianteController {
 	public ModelAndView modificarEstudiante(@ModelAttribute("nuevoEstudiante") Estudiante unEstudiante ) {
 		ModelAndView listadoEditado = new ModelAndView("mostrarEstudiantes");
 		
-			Group3.warn("Mostrando Estudiante modificado: "+unEstudiante.getNombre());
+			Group3.warn("Mostrando Estudiante modificado: "+unEstudiante.getId_Estudiante());
 		
 		try {
 			unServicio.cargarEstudiante(unEstudiante);
@@ -103,7 +106,7 @@ public class EstudianteController {
 	// ELIMINAR
 	@GetMapping("/eliminarEstudiante/{id_Estudiante}")
 	public ModelAndView eliminarEstudiante(@PathVariable(name="id_Estudiante") Integer id) {
-		ModelAndView eliminarEstudiante = new ModelAndView("formularioEstudiante");
+		ModelAndView eliminarEstudiante = new ModelAndView("mostrarEstudiantes");
 		
 		try {
 			unServicio.eliminarUnEstudiante(id);
@@ -112,7 +115,7 @@ public class EstudianteController {
 		}
 		
 		try {
-			eliminarEstudiante.addObject("mostrarEstudiantes", unServicio.listarEstudiantes());
+			eliminarEstudiante.addObject("estudianteListado", unServicio.listarEstudiantes());
 		}catch(Exception e) {
 			eliminarEstudiante.addObject("listarEstudianteErrorMessage", e.getMessage());
 		}
