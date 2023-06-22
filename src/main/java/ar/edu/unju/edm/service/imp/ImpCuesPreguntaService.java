@@ -110,5 +110,15 @@ public class ImpCuesPreguntaService implements ICuesPreguntaService{
 		
 	}
 
+	@Override
+	public Integer obtenerPuntajeTotalDeUnCuestionario(Integer id_cuestionario) {
+		Integer puntajeTotal=0;
+		List<Integer> puntajes=ListadoDePuntajes(id_cuestionario);
+		for(int i=0; i <puntajes.size();i++) {
+			puntajeTotal+=puntajes.get(i);
+		}
+		return puntajeTotal;
+	}
+
 	
 }

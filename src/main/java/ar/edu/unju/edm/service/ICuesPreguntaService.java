@@ -17,4 +17,5 @@ public interface ICuesPreguntaService {
 	public List<Integer> ListarRespuestasDePreguntas(Integer id_Cuestionario);
 	public List<Integer> ListadoDePuntajes (Integer id_Cuestionario);
 	public List<Pregunta> ListarPreguntasNoSeleccionadas(List<Pregunta> seleccionadas, List<Pregunta> todasLasPreguntas);
+	public Integer obtenerPuntajeTotalDeUnCuestionario(Integer id_cuestionario);
 }
