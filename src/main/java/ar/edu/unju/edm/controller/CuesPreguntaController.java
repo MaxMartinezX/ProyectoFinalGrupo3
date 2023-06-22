@@ -44,6 +44,6 @@ public class CuesPreguntaController {
 		
 	  cuesPreguntaService.cargarPreguntasACuestionario(preguntasSeleccionadas, puntajesSeleccionados, id);
 		
-		return "redirect:/cuestionarioConPreguntas/{id_Cuestionario}";
+		return "redirect:/listadoCuestionarios";
 	}
 }
