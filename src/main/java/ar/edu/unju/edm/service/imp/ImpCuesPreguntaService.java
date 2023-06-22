@@ -69,29 +69,30 @@ public class ImpCuesPreguntaService implements ICuesPreguntaService{
 	}
 	
 	@Override
-	public List<Pregunta> ListarPreguntasDeUnCuestionario(Integer id_Cuestionario){
-		Optional<Cuestionario> aux= Optional.of(new Cuestionario());
-		aux = cuestionarioRepository.findById(id_Cuestionario);
-		return cuesPreguntaRepository.findAllByCuestionario(aux.get());
-	}
-	
+	public List<Pregunta> ListarPreguntasDeUnCuestionario(Integer id_Cuestionario) {
+		Cuestionario aux = cuestionarioRepository.findById(id_Cuestionario).get();
+        List<CuesPregunta> cuesPreguntas = cuesPreguntaRepository.findAllByCuestionario(aux);
+        List<Pregunta> preguntas = new ArrayList<>();
+        for (CuesPregunta cuesPregunta : cuesPreguntas) {
+            preguntas.add(cuesPregunta.getPregunta());
+        }
+        return preguntas;
+    }
 	@Override
 	public List<Integer> ListarRespuestasDePreguntas(Integer id_Cuestionario){
-		Optional<Cuestionario> aux= Optional.of(new Cuestionario());
-		aux = cuestionarioRepository.findById(id_Cuestionario);
-		List<Pregunta> preguntas = cuesPreguntaRepository.findAllByCuestionario(aux.get());
-		List<Integer> respuestas = new ArrayList<Integer>();
+		List<Pregunta> preguntas = ListarPreguntasDeUnCuestionario(id_Cuestionario);
+		List<Integer> respuestas = new ArrayList<>();
 		for(int i=0;i<preguntas.size();i++) {
 			respuestas.add(preguntas.get(i).getOpcionCorrecta());
 		}
 		return respuestas;
 	}
+	
 
 	@Override
 	public List<Integer> ListadoDePuntajes(Integer id_Cuestionario) {
-		Optional<Cuestionario> aux= Optional.of(new Cuestionario());
-		aux = cuestionarioRepository.findById(id_Cuestionario);
-		List<CuesPregunta> cuesPreguntas = cuesPreguntaRepository.findAllCPByCuestionario(aux.get());
+		Cuestionario aux = cuestionarioRepository.findById(id_Cuestionario).get();
+        List<CuesPregunta> cuesPreguntas = cuesPreguntaRepository.findAllByCuestionario(aux);
 		List<Integer> puntajes = new ArrayList<Integer>();
 		for(int i=0;i<cuesPreguntas.size();i++) {
 			puntajes.add(cuesPreguntas.get(i).getPuntaje());
