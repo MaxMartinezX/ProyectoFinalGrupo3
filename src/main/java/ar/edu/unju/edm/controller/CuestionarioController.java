@@ -93,19 +93,5 @@ public class CuestionarioController {
 		return listadoCuestionarios;
 	}
 	
-	//RESOLVER CUESTIONARIO
-	
-	@GetMapping("/resolverCuestionario")
-	public ModelAndView resolverCuestionario() {
-	     
-		return null;
-	}
-	
-	
-	
-	
-	
-	
-	
 
 }

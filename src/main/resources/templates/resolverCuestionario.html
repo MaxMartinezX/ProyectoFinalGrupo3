@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<title>Resolver Cuestionario</title>
+<link rel="stylesheet" th:href="@{/webjars/bootstrap/5.3.0/css/bootstrap.min.css}" />
+</head>
+<body>
+<h3>Cuestionario</h3>
+
+<h3> Cuestionario </h3>
+
+<form th:object="${nuevoCuesEstud}" th:action="@{'/resultadoDeCuestionario/' + ${cuestionario.id_Cuestionario}}" method="post">
+
+
+<!-- CUESTIONARIO <TITULO>
+
+ALUMNO: ____ ( select con el llista de alumnos)
+
+PREGUNTA 1
+R1
+R2
+R3
+R4
+
+PREHUNTA2
+.....
+
+PREGUNTA n
+.... -->
+
+
+     <div class="mb-e">
+	            <label class="form-label">Estudiante: </label>
+	            <select th:field="*{estudiante}" class="form-control" required>
+	                <option value="">Seleccionar estudiante...</option>
+	                <option th:each="estudiante : ${listadoEstudiantes}" th:value="${estudiante.id_Estudiante}" th:text="${estudiante.nombre + ' ' + estudiante.apellido}"></option>
+	            </select>
+	</div>
+	 
+	<div class="mb-e">
+	            <label class="form-label">Preguntas </label>
+	            
+	            <div class="form-check" th:each="pregunta : ${preguntas}">
+	            <label th:text="${pregunta.pregunta}" th:id="'pregunta' + ${pregunta.idPregunta}"></label>
+  				<input class="form-check-input" type="radio" th:name="'respuestas[' + ${pregunta.id} + ']'" th:value="1" th:id="pregunta1">
+  				<label class="form-check-label" th:for="pregunta1" th:text="${pregunta.opcion1}">
+  				</label>
+  				<input class="form-check-input" type="radio" th:name="'respuestas[' + ${pregunta.id} + ']'" th:value="2" th:id="pregunta2">
+  				<label class="form-check-label" th:for="pregunta2" th:text="${pregunta.opcion2}">
+  				</label>
+  				<input class="form-check-input" type="radio" th:name="'respuestas[' + ${pregunta.id} + ']'" th:value="3" th:id="pregunta3">
+  				<label class="form-check-label" th:for="pregunta3" th:text="${pregunta.opcion3}">
+  				</label>
+  				<input class="form-check-input" type="radio" th:name="'respuestas[' + ${pregunta.id} + ']'" th:value="4" th:id="$pregunta4">
+  				<label class="form-check-label" th:for="pregunta4" th:text="${pregunta.opcion4}">
+  				</label>
+				</div>
+	</div>
+	
+</form>        
+
+<script th:src="@{/webjars/bootstrap/5.3.0/js/bootstrap.min.js}"></script>
+</body>
+</html>

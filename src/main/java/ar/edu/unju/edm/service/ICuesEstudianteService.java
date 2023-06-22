@@ -18,6 +18,6 @@ public interface ICuesEstudianteService {
 	public CuesEstudiante listarUnCuestionarioEstudiante(Integer idCuesEstudiante);
 	public CuesEstudiante modificarCuestionarioEstudiante(Integer idCuesEstudiante);
 	public void eliminarTodosCuesEstudiantes();
-	public Integer calcularPuntajeObtenido(List<Integer> opcionesCorrectas, List<Integer> opcionesElegidas, List<Integer> puntajes);
+	public Integer calcularPuntajeObtenido(List<Integer> opcionesCorrectas, List<String> opcionesElegidas, List<Integer> puntajes);
 	public String fechaActual();
 }
