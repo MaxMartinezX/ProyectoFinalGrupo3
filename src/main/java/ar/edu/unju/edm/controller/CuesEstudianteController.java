@@ -55,9 +55,9 @@ public class CuesEstudianteController {
 	
 	//El Estudiante resuelve el cuestionario
 	
-	@GetMapping("/resolverCuestionarios/{id_Cuestionario}")
+	@GetMapping("/resolverCuestionario/{id_Cuestionario}")
 	public ModelAndView resolverCuesEstudiante(@PathVariable(name="id_Cuestionario")  Integer idCuesElegido) {
-		ModelAndView resolverCuestionario = new ModelAndView("resolverCuestionarios");
+		ModelAndView resolverCuestionario = new ModelAndView("resolverCuestionario");
 			
 			resolverCuestionario.addObject("nuevoCuesEstud", unCuesEstudiante);
 			resolverCuestionario.addObject("listadoEstudiantes", estudianteService.listarEstudiantes());
@@ -74,7 +74,7 @@ public class CuesEstudianteController {
 	//Guardar las respuestas del cuestionario
 	@PostMapping("/resultadoDeCuestionario/{id_Cuestionario}")
 	public ModelAndView guardarCuestionarioERealizado(@ModelAttribute("cuesEstudiante") CuesEstudiante cuesEstudianteConDatos,
-			@RequestParam("respuestasSeleccionadas") List<Integer> seleccionadas, @PathVariable(name="id_Cuestionario") Integer idCuestionario ) { 
+			@RequestParam("respuestasSeleccionadas") List<String> seleccionadas, @PathVariable(name="id_Cuestionario") Integer idCuestionario ) { 
 		
 		ModelAndView resultadoCuestionario = new ModelAndView("resultadoCuestionario");
 		

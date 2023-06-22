@@ -19,6 +19,7 @@ public class ImpCuesEstudianteService implements ICuesEstudianteService {
 	@Autowired
 	CuesEstudianteRepository cuesEstudianteRepository;
 	
+	
 	@Override
 	public void cargarCuesEstudiante(CuesEstudiante cuesEstudiante) {
 		cuesEstudiante.setEstado(true);
@@ -59,9 +60,10 @@ public class ImpCuesEstudianteService implements ICuesEstudianteService {
 	}
 
 	@Override
-	public Integer calcularPuntajeObtenido(List<Integer> opcionesCorrectas, List<Integer> opcionesElegidas, List<Integer> puntajes) {
+	public Integer calcularPuntajeObtenido(List<Integer> opcionesCorrectas, List<String> opcionesElegidas, List<Integer> puntajes) {
 		Integer puntajeObtenido=0;
-		for(int i=0; i<=opcionesElegidas.size();i++) {
+		for(String opciones : opcionesElegidas) {
+			
 			if(opcionesCorrectas.get(i)==opcionesElegidas.get(i)) {
 				puntajeObtenido+=puntajes.get(i);
 			}
