@@ -2,8 +2,8 @@ package ar.edu.unju.edm.service.imp;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,22 +22,19 @@ public class ImpCuesEstudianteService implements ICuesEstudianteService {
 	
 	@Override
 	public void cargarCuesEstudiante(CuesEstudiante cuesEstudiante) {
-		cuesEstudiante.setEstado(true);
 		cuesEstudianteRepository.save(cuesEstudiante);
 	}
 
 	@Override
 	public void eliminarCuesEstudiante(Integer idCuesEstudiante) {
-		Optional<CuesEstudiante> aux = Optional.of(new CuesEstudiante());
-		aux = cuesEstudianteRepository.findById(idCuesEstudiante);
-		aux.get().setEstado(false);
-		cuesEstudianteRepository.save(aux.get());
+		CuesEstudiante aux = cuesEstudianteRepository.findById(idCuesEstudiante).get();
+		cuesEstudianteRepository.delete(aux);
 	}
 
 	@Override
 	public ArrayList<CuesEstudiante> listarTodosCuestionariosEstudiantes() {
 		
-		return (ArrayList<CuesEstudiante>) cuesEstudianteRepository.findByEstado(true);
+		return (ArrayList<CuesEstudiante>) cuesEstudianteRepository.findAll();
 	}
 
 	@Override
@@ -60,24 +57,26 @@ public class ImpCuesEstudianteService implements ICuesEstudianteService {
 	}
 
 	@Override
-	public Integer calcularPuntajeObtenido(List<Integer> opcionesCorrectas, List<String> opcionesElegidas, List<Integer> puntajes) {
-		Integer puntajeObtenido=0;
-		/*for(String opciones : opcionesElegidas) {
-			
-			if(opcionesCorrectas.get(i)==opcionesElegidas.get(i)) {
-				puntajeObtenido+=puntajes.get(i);
-			}
-		}
-		*/
-		return puntajeObtenido;
-	}
 
-	@Override
 	public String fechaActual() {
 		LocalDate fechaActual = LocalDate.now();
 		String fechaString = fechaActual.toString();
 
 		return fechaString;
+	}
+
+	@Override
+	public Integer calcularPuntajeObtenido(List<Integer> opcionesCorrectas, Map<String,String> opcionesElegidas,List<Integer> puntajes) {
+		Integer puntajeObtenido=0;
+		int i=0;
+		for(Map.Entry<String, String> opcion: opcionesElegidas.entrySet()) {
+			Integer aux=Integer.parseInt(opcion.getValue());
+			if(aux==opcionesCorrectas.get(i)) {
+				puntajeObtenido+=puntajes.get(i);
+			}
+			i++;
+		}
+		return puntajeObtenido;
 	}
 
 }

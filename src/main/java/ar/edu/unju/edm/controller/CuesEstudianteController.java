@@ -1,12 +1,12 @@
 package ar.edu.unju.edm.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.juli.logging.Log;
 import org.apache.juli.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,12 +15,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import ar.edu.unju.edm.model.CuesEstudiante;
-import ar.edu.unju.edm.repository.CuesEstudianteRepository;
+import ar.edu.unju.edm.repository.CuestionarioRepository;
 import ar.edu.unju.edm.service.ICuesEstudianteService;
 import ar.edu.unju.edm.service.ICuesPreguntaService;
 import ar.edu.unju.edm.service.ICuestionarioService;
 import ar.edu.unju.edm.service.IEstudianteService;
-import jakarta.validation.Valid;
+
 
 @Controller
 public class CuesEstudianteController {
@@ -42,6 +42,9 @@ public class CuesEstudianteController {
 	@Autowired
 	CuesEstudiante unCuesEstudiante;
 	
+	@Autowired
+	CuestionarioRepository cuestionarioRepository;
+	
 	
 	
 	@GetMapping("/elegirCuestionario")
@@ -59,13 +62,12 @@ public class CuesEstudianteController {
 	public ModelAndView resolverCuesEstudiante(@PathVariable(name="id_Cuestionario")  Integer idCuesElegido) {
 		ModelAndView resolverCuestionario = new ModelAndView("resolverCuestionario");
 			
-			resolverCuestionario.addObject("nuevoCuesEstud", unCuesEstudiante);
+			resolverCuestionario.addObject("nuevoCuesEstudiante", unCuesEstudiante);
 			resolverCuestionario.addObject("listadoEstudiantes", estudianteService.listarEstudiantes());
 			
 			resolverCuestionario.addObject("cuestionario", cuestionarioService.mostrarUnCuestionario(idCuesElegido));
 			resolverCuestionario.addObject("preguntas", cuesPreguntasService.ListarPreguntasDeUnCuestionario(idCuesElegido));
 			
-				
 		return resolverCuestionario;
 	}
 	
@@ -73,16 +75,19 @@ public class CuesEstudianteController {
 	
 	//Guardar las respuestas del cuestionario
 	@PostMapping("/resultadoDeCuestionario/{id_Cuestionario}")
-	public ModelAndView guardarCuestionarioERealizado(@ModelAttribute("cuesEstudiante") CuesEstudiante cuesEstudianteConDatos,
-			@RequestParam("respuestasSeleccionadas") List<String> seleccionadas, @PathVariable(name="id_Cuestionario") Integer idCuestionario ) { 
+	public ModelAndView guardarCuestionarioERealizado(@ModelAttribute("nuevoCuesEstudiante") CuesEstudiante cuesEstudianteConDatos,
+			@RequestParam Map<String,String> respuestasSeleccionadas, @PathVariable(name="id_Cuestionario") Integer idCuestionario ) { 
 		
 		ModelAndView resultadoCuestionario = new ModelAndView("resultadoCuestionario");
+		GRUPO3.warn(cuesEstudianteConDatos);
+		System.out.println(cuesEstudianteConDatos.getId_CuesEstudiante());
+		System.out.println(cuesEstudianteConDatos.getEstudiante());
 		
 		try {
 			
 			cuesEstudianteConDatos.setFechaRealizada(cuesEstudianteService.fechaActual());
-			cuesEstudianteConDatos.setPuntajeObtenido(cuesEstudianteService.calcularPuntajeObtenido(cuesPreguntasService.ListarRespuestasDePreguntas(idCuestionario), seleccionadas, cuesPreguntasService.ListadoDePuntajes(idCuestionario)));
-		
+			cuesEstudianteConDatos.setPuntajeObtenido(cuesEstudianteService.calcularPuntajeObtenido(cuesPreguntasService.ListarRespuestasDePreguntas(idCuestionario), respuestasSeleccionadas, cuesPreguntasService.ListadoDePuntajes(idCuestionario)));
+            cuesEstudianteConDatos.setCuestionario(cuestionarioRepository.findById(idCuestionario).get());
 			cuesEstudianteService.cargarCuesEstudiante(cuesEstudianteConDatos);
 			
 		}catch(Exception e) {
