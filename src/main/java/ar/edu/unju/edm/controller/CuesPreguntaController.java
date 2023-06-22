@@ -41,7 +41,7 @@ public class CuesPreguntaController {
 	}
 	
 	@PostMapping("/guardarCuestionarioPregunta/{id_Cuestionario}")
-	public String guardarCuesPregunta(@ModelAttribute("cuesPregunta") CuesPregunta CuestionarioP, @RequestParam("preguntasSeleccionadas") List<Integer> preguntasSeleccionadas, @RequestParam("puntajesSeleccionados") List<Integer> puntajesSeleccionados, @PathVariable(name="id_Cuestionario") Integer id) {
+	public String guardarCuesPregunta(@ModelAttribute("cuesPregunta") CuesPregunta CuestionarioP, @RequestParam("preguntasSeleccionada") List<Integer> preguntasSeleccionadas, @RequestParam("puntajesSeleccionados") List<Integer> puntajesSeleccionados, @PathVariable(name="id_Cuestionario") Integer id) {
 		
 		
 	  cuesPreguntaService.cargarPreguntasACuestionario(preguntasSeleccionadas, puntajesSeleccionados, id);

@@ -68,6 +68,7 @@ public class CuesEstudianteController {
 			resolverCuestionario.addObject("cuestionario", cuestionarioService.mostrarUnCuestionario(idCuesElegido));
 			resolverCuestionario.addObject("preguntas", cuesPreguntasService.ListarPreguntasDeUnCuestionario(idCuesElegido));
 			
+			
 		return resolverCuestionario;
 	}
 	
@@ -79,12 +80,14 @@ public class CuesEstudianteController {
 			@RequestParam Map<String,String> respuestasSeleccionadas, @PathVariable(name="id_Cuestionario") Integer idCuestionario ) { 
 		
 		ModelAndView resultadoCuestionario = new ModelAndView("resultadoCuestionario");
+		
 		GRUPO3.warn(cuesEstudianteConDatos);
 		System.out.println(cuesEstudianteConDatos.getId_CuesEstudiante());
 		System.out.println(cuesEstudianteConDatos.getEstudiante());
 		
 		try {
 			
+			cuesEstudianteConDatos.getCuestionario().setPuntajeTotal(cuesPreguntasService.obtenerPuntajeTotalDeUnCuestionario(idCuestionario));
 			cuesEstudianteConDatos.setFechaRealizada(cuesEstudianteService.fechaActual());
 			cuesEstudianteConDatos.setPuntajeObtenido(cuesEstudianteService.calcularPuntajeObtenido(cuesPreguntasService.ListarRespuestasDePreguntas(idCuestionario), respuestasSeleccionadas, cuesPreguntasService.ListadoDePuntajes(idCuestionario)));
             cuesEstudianteConDatos.setCuestionario(cuestionarioRepository.findById(idCuestionario).get());
@@ -103,7 +106,7 @@ public class CuesEstudianteController {
 	@GetMapping("/cuestionariosRealizados")
 	public ModelAndView guardarCuesEstudiante () {
 		
-		ModelAndView listadoCuesEstudiante = new ModelAndView("mostrarCuesEstudiantes");
+		ModelAndView listadoCuesEstudiante = new ModelAndView("mostrarCuestionariosResueltos");
 		
 		listadoCuesEstudiante.addObject("cuesEstudianteListado", cuesEstudianteService.listarTodosCuestionariosEstudiantes() );
 		
