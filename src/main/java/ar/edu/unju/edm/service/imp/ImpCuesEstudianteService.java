@@ -2,7 +2,6 @@ package ar.edu.unju.edm.service.imp;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -60,24 +59,25 @@ public class ImpCuesEstudianteService implements ICuesEstudianteService {
 	}
 
 	@Override
-	public Integer calcularPuntajeObtenido(List<Integer> opcionesCorrectas, List<String> opcionesElegidas, List<Integer> puntajes) {
-		Integer puntajeObtenido=0;
-		for(String opciones : opcionesElegidas) {
-			
-			if(opcionesCorrectas.get(i)==opcionesElegidas.get(i)) {
-				puntajeObtenido+=puntajes.get(i);
-			}
-		}
-		
-		return puntajeObtenido;
-	}
-
-	@Override
 	public String fechaActual() {
 		LocalDate fechaActual = LocalDate.now();
 		String fechaString = fechaActual.toString();
 
 		return fechaString;
+	}
+
+	@Override
+	public Integer calcularPuntajeObtenido(List<Integer> opcionesCorrectas, List<String> opcionesElegidas,List<Integer> puntajes) {
+		Integer puntajeObtenido=0;
+		int i=0;
+		for(String opcion: opcionesElegidas) {
+			Integer aux=Integer.parseInt(opcion);
+			if(aux==opcionesCorrectas.get(i)) {
+				puntajeObtenido+=puntajes.get(i);
+			}
+			i++;
+		}
+		return puntajeObtenido;
 	}
 
 }

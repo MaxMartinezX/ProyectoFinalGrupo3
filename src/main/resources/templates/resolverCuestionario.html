@@ -43,16 +43,16 @@ PREGUNTA n
 	            
 	            <div class="form-check" th:each="pregunta : ${preguntas}">
 	            <label th:text="${pregunta.pregunta}" th:id="'pregunta' + ${pregunta.idPregunta}"></label>
-  				<input class="form-check-input" type="radio" th:name="'respuestas[' + ${pregunta.id} + ']'" th:value="1" th:id="pregunta1">
+  				<input class="form-check-input" type="radio" th:name="'respuestasSeleccionadas[' + ${pregunta.id} + ']'" th:value="1" th:id="pregunta1">
   				<label class="form-check-label" th:for="pregunta1" th:text="${pregunta.opcion1}">
   				</label>
-  				<input class="form-check-input" type="radio" th:name="'respuestas[' + ${pregunta.id} + ']'" th:value="2" th:id="pregunta2">
+  				<input class="form-check-input" type="radio" th:name="'respuestasSeleccionadas[' + ${pregunta.id} + ']'" th:value="2" th:id="pregunta2">
   				<label class="form-check-label" th:for="pregunta2" th:text="${pregunta.opcion2}">
   				</label>
-  				<input class="form-check-input" type="radio" th:name="'respuestas[' + ${pregunta.id} + ']'" th:value="3" th:id="pregunta3">
+  				<input class="form-check-input" type="radio" th:name="'respuestasSeleccionadas[' + ${pregunta.id} + ']'" th:value="3" th:id="pregunta3">
   				<label class="form-check-label" th:for="pregunta3" th:text="${pregunta.opcion3}">
   				</label>
-  				<input class="form-check-input" type="radio" th:name="'respuestas[' + ${pregunta.id} + ']'" th:value="4" th:id="$pregunta4">
+  				<input class="form-check-input" type="radio" th:name="'respuestasSeleccionadas[' + ${pregunta.id} + ']'" th:value="4" th:id="$pregunta4">
   				<label class="form-check-label" th:for="pregunta4" th:text="${pregunta.opcion4}">
   				</label>
 				</div>

@@ -99,4 +99,15 @@ public class ImpCuesPreguntaService implements ICuesPreguntaService{
 		return puntajes;
 	}
 
+	@Override
+	public List<Pregunta> ListarPreguntasNoSeleccionadas(List<Pregunta> seleccionadas,List<Pregunta> todasLasPreguntas) {
+		List<Pregunta> noSeleccionadas = new ArrayList<Pregunta>(todasLasPreguntas);
+		
+		noSeleccionadas.removeAll(seleccionadas);
+		
+		return noSeleccionadas;
+		
+	}
+
+	
 }

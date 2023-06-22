@@ -33,6 +33,8 @@ public class CuesPreguntaController {
 		
 		ModelAndView unCuesP= new ModelAndView("formularioCuesPregunta");
 		
+		unCuesP.addObject("listadoSeleccionadas", cuesPreguntaService.ListarPreguntasDeUnCuestionario(id));
+		unCuesP.addObject("listadoDeNoSeleccionadas", cuesPreguntaService.ListarPreguntasNoSeleccionadas( cuesPreguntaService.ListarPreguntasDeUnCuestionario(id), preguntaService.listarPreguntas()));
 		unCuesP.addObject("listadoPreguntas", preguntaService.listarPreguntas());
 		
 		return unCuesP;
@@ -46,4 +48,6 @@ public class CuesPreguntaController {
 		
 		return "redirect:/listadoCuestionarios";
 	}
+	
+	
 }
