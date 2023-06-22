@@ -1,6 +1,9 @@
 package ar.edu.unju.edm.service.imp;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,6 +56,26 @@ public class ImpCuesEstudianteService implements ICuesEstudianteService {
 	public void eliminarTodosCuesEstudiantes() {
 		// TODO Auto-generated method stub
 		
+	}
+
+	@Override
+	public Integer calcularPuntajeObtenido(List<Integer> opcionesCorrectas, List<Integer> opcionesElegidas, List<Integer> puntajes) {
+		Integer puntajeObtenido=0;
+		for(int i=0; i<=opcionesElegidas.size();i++) {
+			if(opcionesCorrectas.get(i)==opcionesElegidas.get(i)) {
+				puntajeObtenido+=puntajes.get(i);
+			}
+		}
+		
+		return puntajeObtenido;
+	}
+
+	@Override
+	public String fechaActual() {
+		LocalDate fechaActual = LocalDate.now();
+		String fechaString = fechaActual.toString();
+
+		return fechaString;
 	}
 
 }
