@@ -87,4 +87,16 @@ public class ImpCuesPreguntaService implements ICuesPreguntaService{
 		return respuestas;
 	}
 
+	@Override
+	public List<Integer> ListadoDePuntajes(Integer id_Cuestionario) {
+		Optional<Cuestionario> aux= Optional.of(new Cuestionario());
+		aux = cuestionarioRepository.findById(id_Cuestionario);
+		List<CuesPregunta> cuesPreguntas = cuesPreguntaRepository.findAllCPByCuestionario(aux.get());
+		List<Integer> puntajes = new ArrayList<Integer>();
+		for(int i=0;i<cuesPreguntas.size();i++) {
+			puntajes.add(cuesPreguntas.get(i).getPuntaje());
+		}
+		return puntajes;
+	}
+
 }
