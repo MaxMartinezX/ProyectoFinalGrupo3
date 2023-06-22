@@ -86,14 +86,16 @@ public class DocenteController {
 			editarDocente.addObject("modificarDocenteErrorMessage", e.getMessage());
 		}
 		
+		GRUPO3.warn("Docente a modificar: " + id);
 		editarDocente.addObject("band", true);
 		
 		return editarDocente;
 	}
 	
 	@PostMapping(value ="/modificarDocente", consumes="multipart/form-data")
-	public ModelAndView modificarDocente(@ModelAttribute("nuevoDocente") Docente docenteNuevo,@RequestParam("file") MultipartFile[] archivo){
+	public ModelAndView modificarDocente(@ModelAttribute("nuevoDocente") Docente docenteNuevo, @RequestParam("file") MultipartFile[] archivo){
 		ModelAndView listadoDocentes = new ModelAndView("mostrarDocentes");
+		
 		
 		//carga de la foto
 		try {
@@ -106,8 +108,8 @@ public class DocenteController {
 		}
 		
 		
-		GRUPO3.warn("Docente modificado: " + docenteNuevo.getNombre());
 		try {
+			GRUPO3.warn("Docente modificado: " + docenteNuevo.getId_Docente());
 			unServicio.cargarDocente(docenteNuevo);
 		}catch(Exception e) {
 			listadoDocentes.addObject("cargaDocenteErrorMessage", e.getMessage());
@@ -122,7 +124,7 @@ public class DocenteController {
 	
 	@GetMapping("/eliminarDocente/{id_Docente}")
 	public ModelAndView eliminarDocente(@PathVariable(name="id_Docente") Integer id) {
-		ModelAndView eliminarDocente = new ModelAndView("formularioDocente");
+		ModelAndView eliminarDocente = new ModelAndView("mostrarDocentes");
 		
 		try {
 			unServicio.eliminarDocente(id);
@@ -131,7 +133,7 @@ public class DocenteController {
 		}
 		
 		try {
-			eliminarDocente.addObject("mostrarDocentes", unServicio.listarDocentes());
+			eliminarDocente.addObject("docenteListado", unServicio.listarDocentes());
 		}catch(Exception e) {
 			eliminarDocente.addObject("listarDocenteErrorMessage", e.getMessage());
 		}
