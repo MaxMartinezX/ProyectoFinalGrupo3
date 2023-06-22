@@ -8,7 +8,10 @@
 <body>
 <div class="container col-6">
 	<h3>Registro de Nuevo Estudiante</h3>
-    <form th:object="${nuevoEstudiante}" th:action="@{/guardarEstudiante}" method="post">
+    <form th:object="${nuevoEstudiante}" th:action="${band}?@{/modificarEstudiante}:@{/guardarEstudiante}" method="post">
+        
+        <input type="hidden" class="form-control" th:if="${band}" th:field="*{id_Estudiante}">
+				
         <div class="mb-e">
             <label class="form-label" for="fnombre">Nombre:</label>
             <input type="text" th:field="*{nombre}" class="form-control" required/><br/>
@@ -41,7 +44,7 @@
         
         <div class="mb-e">
             <label class="form-label" for="fcurso">Curso:</label>
-            <select th:field="*{curso}" class="form-control" required><br/>
+            <select th:field="*{curso}" class="form-control" required>
                 <option th:value="1">Primer Año</option>
                 <option th:value="2">Segundo Año</option>
                 <option th:value="3">Tercer Año</option>

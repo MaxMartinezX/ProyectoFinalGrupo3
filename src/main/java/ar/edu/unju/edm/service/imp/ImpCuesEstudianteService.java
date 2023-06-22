@@ -62,13 +62,13 @@ public class ImpCuesEstudianteService implements ICuesEstudianteService {
 	@Override
 	public Integer calcularPuntajeObtenido(List<Integer> opcionesCorrectas, List<String> opcionesElegidas, List<Integer> puntajes) {
 		Integer puntajeObtenido=0;
-		for(String opciones : opcionesElegidas) {
+		/*for(String opciones : opcionesElegidas) {
 			
 			if(opcionesCorrectas.get(i)==opcionesElegidas.get(i)) {
 				puntajeObtenido+=puntajes.get(i);
 			}
 		}
-		
+		*/
 		return puntajeObtenido;
 	}
 
