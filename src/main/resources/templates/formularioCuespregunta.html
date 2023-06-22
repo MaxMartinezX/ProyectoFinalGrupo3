@@ -9,7 +9,7 @@
 <div class="container col-8">
 	<h3>Agregando Preguntas</h3>
 	<div class="container col-10">
-		<form th:action="@{/guardarCuestionarioPregunta/{id_Cuestionario}}" method="post">
+		<form th:action="@{'/guardarCuestionarioPregunta/' + ${id_Cuestionario}}" method="post">
 		<table class="table table-striped-columns">
 		<tr>
 			<th>Seleccionar</th>
@@ -47,6 +47,7 @@
 		<button class="btn btn-primary" type="submit">Añadir preguntas</button>
 		</form>
 	</div>
+</div>
 <script th:src="@{/webjars/bootstrap/5.3.0/js/bootstrap.min.js}"></script>
 </body>
 </html>
