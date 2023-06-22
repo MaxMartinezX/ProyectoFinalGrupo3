@@ -1,12 +1,29 @@
 <!DOCTYPE html>
-<html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
 <head>
-<meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<meta charset="utf-8">
+<title>Resolucion de Cuestionario</title>
+<link rel="stylesheet" th:href="@{/webjars/bootstrap/5.3.0/css/bootstrap.min.css}" />
 </head>
 <body>
+  
 <div th:replace="~{layout :: header}"></div>
-<h1>Si sirve :D</h1>
-
+<div class="container col-8">
+	<table class="table table-striped-columns">
+	<tr>
+		<th>Alumno</th>
+		<th>Cuestionario</th>
+		<th>Puntaje Total</th>
+	</tr>
+	<tr>
+	 	<td th:text="${alumno.nombre}"></td>
+	  	<td th:text="${cuestionario.titulo}"></td>
+	  	<td th:text="${puntaje.puntajeObtenido}"></td>
+	</tr>
+	</table>
+	<button class="btn btn-primary" th:ref="@{/index}">Volver al Inicio</button>
+	<button class="btn btn-primary" th:ref="@{/elegirCuestionario}">Elegir otro cuestionario</button>
+</div>
+<script th:src="@{/webjars/bootstrap/5.3.0/js/bootstrap.min.js}"></script>
 </body>
 </html>
