@@ -43,6 +43,7 @@ public class CuesEstudianteController {
 	CuesEstudiante unCuesEstudiante;
 	
 	
+	
 	@GetMapping("/elegirCuestionario")
 	public ModelAndView cargarCuesEstudiante () {
 		ModelAndView cargaCuesEstudiante = new ModelAndView("mostrarCuestionariosAEstudiantes");
@@ -50,24 +51,6 @@ public class CuesEstudianteController {
 		
 		return cargaCuesEstudiante;
 	}
-	
-	/*
-	@PostMapping("/guardarCuestionarioEARealizar")
-	public ModelAndView guardarCuesEstudiante ( @ModelAttribute("cuesEstudiante") CuesEstudiante cuestionarioHecho) {
-		
-		ModelAndView listadoCuesEstudiante = new ModelAndView("mostrarCuesEstudiante");
-		
-		try {
-			cuesEstudianteService.cargarCuesEstudiante(cuestionarioHecho);
-		}catch(Exception e) {
-			listadoCuesEstudiante.addObject("cargarCuestionarioEstudianteErrorMessage", e.getMessage());
-		}
-		
-		listadoCuesEstudiante.addObject("cuesEstudianteListado", cuesEstudianteService.listarTodosCuestionariosEstudiantes() );
-		
-		return listadoCuesEstudiante;
-	}
-	*/
 	
 	
 	//El Estudiante resuelve el cuestionario
@@ -105,8 +88,21 @@ public class CuesEstudianteController {
 		}catch(Exception e) {
 			resultadoCuestionario.addObject("GuardarCuesEstudianteErrorMessage", e.getMessage());
 		}
+			resultadoCuestionario.addObject("cuesEstudiante", cuesEstudianteConDatos);
 			
 		return resultadoCuestionario;
+	}
+	
+	
+	//mostrando todos los cuesEstudiantes
+	@GetMapping("/cuestionariosRealizados")
+	public ModelAndView guardarCuesEstudiante () {
+		
+		ModelAndView listadoCuesEstudiante = new ModelAndView("mostrarCuesEstudiantes");
+		
+		listadoCuesEstudiante.addObject("cuesEstudianteListado", cuesEstudianteService.listarTodosCuestionariosEstudiantes() );
+		
+		return listadoCuesEstudiante;
 	}
 	
 }
