@@ -25,6 +25,8 @@ public class CuesPregunta {
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="id_Cuestionario")
 	Cuestionario cuestionario;
+	
+	private Integer puntaje;
 
 	public CuesPregunta() {
 		
@@ -53,6 +55,16 @@ public class CuesPregunta {
 	public void setCuestionario(Cuestionario cuestionario) {
 		this.cuestionario = cuestionario;
 	}
+
+	public Integer getPuntaje() {
+		return puntaje;
+	}
+
+	public void setPuntaje(Integer puntaje) {
+		this.puntaje = puntaje;
+	}
+	
+	
 	
 	
 }

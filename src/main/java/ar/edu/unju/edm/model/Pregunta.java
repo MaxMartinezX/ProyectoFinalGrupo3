@@ -15,11 +15,27 @@ public class Pregunta {
 	private String opcion2;
 	private String opcion3;
 	private String opcion4;
+	private short dificultad;
 	private Integer opcionCorrecta;
 	private Boolean estado;
 	
 	public Pregunta() {
-		
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	public Pregunta(Integer idPregunta, String pregunta, String opcion1, String opcion2, String opcion3, String opcion4,
+			short dificultad, Integer opcionCorrecta, Boolean estado) {
+		super();
+		this.idPregunta = idPregunta;
+		this.pregunta = pregunta;
+		this.opcion1 = opcion1;
+		this.opcion2 = opcion2;
+		this.opcion3 = opcion3;
+		this.opcion4 = opcion4;
+		this.dificultad = dificultad;
+		this.opcionCorrecta = opcionCorrecta;
+		this.estado = estado;
 	}
 
 	public Integer getIdPregunta() {
@@ -70,6 +86,14 @@ public class Pregunta {
 		this.opcion4 = opcion4;
 	}
 
+	public short getDificultad() {
+		return dificultad;
+	}
+
+	public void setDificultad(short dificultad) {
+		this.dificultad = dificultad;
+	}
+
 	public Integer getOpcionCorrecta() {
 		return opcionCorrecta;
 	}
@@ -85,5 +109,7 @@ public class Pregunta {
 	public void setEstado(Boolean estado) {
 		this.estado = estado;
 	}
+	
+	
 
 }
