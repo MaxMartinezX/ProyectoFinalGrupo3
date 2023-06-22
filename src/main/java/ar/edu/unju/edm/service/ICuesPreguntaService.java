@@ -15,4 +15,5 @@ public interface ICuesPreguntaService {
 	public void cargarPreguntasACuestionario (List<Integer> preguntasSeleccionadas,List<Integer> puntajesSeleccionados, Integer id_Cuestionario);
 	public List<Pregunta> ListarPreguntasDeUnCuestionario(Integer id_Cuestionario);
 	public List<Integer> ListarRespuestasDePreguntas(Integer id_Cuestionario);
+	public List<Integer> ListadoDePuntajes (Integer id_Cuestionario);
 }

@@ -12,4 +12,5 @@ import ar.edu.unju.edm.model.Cuestionario;
 @Repository
 public interface CuesPreguntaRepository extends CrudRepository<CuesPregunta, Integer>{
 	 public List<Pregunta> findAllByCuestionario (Cuestionario cuestionario);
+	 public List<CuesPregunta> findAllCPByCuestionario (Cuestionario cuestionario);
 }
