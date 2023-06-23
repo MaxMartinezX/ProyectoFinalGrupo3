@@ -37,6 +37,7 @@ public class DocenteController {
 		cargaDocente.addObject("nuevoDocente", unDocente);
 		
 		cargaDocente.addObject("band", false);
+		GRUPO3.warn("Cargando nuevo Docente");
 		return cargaDocente;
 	}
 	
@@ -63,6 +64,7 @@ public class DocenteController {
 		
 		//carga de la foto
 		try {
+			GRUPO3.warn("Cargando la FOTO");
 			byte[] contenido= archivo[0].getBytes();
 			String base64= Base64.getEncoder().encodeToString(contenido);
 			docenteNuevo.setFoto(base64);
@@ -77,6 +79,7 @@ public class DocenteController {
 			unServicio.cargarDocente(docenteNuevo);
 		}catch(Exception e) {
 			listadoDocentes.addObject("cargaDocenteErrorMessage", e.getMessage());
+			GRUPO3.error(e);
 		}
 		
 		listadoDocentes.addObject("docenteListado",unServicio.listarDocentes());
@@ -94,6 +97,7 @@ public class DocenteController {
 			editarDocente.addObject("nuevoDocente",unServicio.mostrarUnDocente(id));
 		}catch(Exception e) {
 			editarDocente.addObject("modificarDocenteErrorMessage", e.getMessage());
+			GRUPO3.error(e);
 		}
 		
 		GRUPO3.warn("Docente a modificar: " + id);
@@ -109,6 +113,7 @@ public class DocenteController {
 		
 		//carga de la foto
 		try {
+			GRUPO3.warn("Cargando una imagen para el docente");
 			byte[] contenido= archivo[0].getBytes();
 			String base64= Base64.getEncoder().encodeToString(contenido);
 			docenteNuevo.setFoto(base64);
@@ -123,6 +128,7 @@ public class DocenteController {
 			unServicio.cargarDocente(docenteNuevo);
 		}catch(Exception e) {
 			listadoDocentes.addObject("cargaDocenteErrorMessage", e.getMessage());
+			GRUPO3.error(e);
 		}
 		
 		listadoDocentes.addObject("docenteListado",unServicio.listarDocentes());
@@ -137,19 +143,22 @@ public class DocenteController {
 		ModelAndView eliminarDocente = new ModelAndView("mostrarDocentes");
 		
 		try {
+			GRUPO3.warn("Eliminando Docente");
 			unServicio.eliminarDocente(id);
 		}catch(Exception e) {
 			eliminarDocente.addObject("eliminarDocenteErrorMessage", e.getMessage());
+			GRUPO3.error(e);
 		}
 		
 		try {
+			GRUPO3.warn("Listando Docentes");
 			eliminarDocente.addObject("docenteListado", unServicio.listarDocentes());
 		}catch(Exception e) {
 			eliminarDocente.addObject("listarDocenteErrorMessage", e.getMessage());
+			GRUPO3.error(e);
 		}
 		
 		return eliminarDocente;
 	}
-	
 
 }

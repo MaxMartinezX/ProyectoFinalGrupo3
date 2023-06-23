@@ -47,4 +47,12 @@ public class ImpPreguntaService implements IPreguntaService{
 		return null;
 	}
 
+	@Override
+	public Pregunta listarUnaPregunta(Integer idPregunta) {
+		Optional<Pregunta> aux = Optional.of(new Pregunta());
+		aux = preguntaRepository.findById(idPregunta);
+		return aux.get();
+	}
+	
+
 }
