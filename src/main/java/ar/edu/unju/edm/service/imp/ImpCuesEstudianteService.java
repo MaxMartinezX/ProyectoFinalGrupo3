@@ -12,12 +12,15 @@ import org.springframework.stereotype.Service;
 import ar.edu.unju.edm.model.CuesEstudiante;
 import ar.edu.unju.edm.repository.CuesEstudianteRepository;
 import ar.edu.unju.edm.service.ICuesEstudianteService;
+import ar.edu.unju.edm.service.ICuesPreguntaService;
 
 @Service
 public class ImpCuesEstudianteService implements ICuesEstudianteService {
 
 	@Autowired
 	CuesEstudianteRepository cuesEstudianteRepository;
+	@Autowired
+	ICuesPreguntaService cuesPreguntaService;
 	
 	
 	@Override
@@ -66,7 +69,9 @@ public class ImpCuesEstudianteService implements ICuesEstudianteService {
 	}
 
 	@Override
-	public Integer calcularPuntajeObtenido(List<Integer> opcionesCorrectas, Map<String,String> opcionesElegidas,List<Integer> puntajes) {
+	public Integer calcularPuntajeObtenido(Integer idCuestionario, Map<String,String> opcionesElegidas) {
+		List<Integer> opcionesCorrectas = cuesPreguntaService.ListarRespuestasDePreguntas(idCuestionario);
+		List<Integer> puntajes= cuesPreguntaService.ListadoDePuntajes(idCuestionario);
 		Integer puntajeObtenido=0;
 		int i=0;
 		for(Map.Entry<String, String> opcion: opcionesElegidas.entrySet()) {

@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import ar.edu.unju.edm.model.CuesEstudiante;
+import ar.edu.unju.edm.model.Cuestionario;
 import ar.edu.unju.edm.repository.CuestionarioRepository;
 import ar.edu.unju.edm.service.ICuesEstudianteService;
 import ar.edu.unju.edm.service.ICuesPreguntaService;
@@ -76,28 +77,29 @@ public class CuesEstudianteController {
 	
 	//Guardar las respuestas del cuestionario
 	@PostMapping("/resultadoDeCuestionario/{id_Cuestionario}")
-	public ModelAndView guardarCuestionarioERealizado(@ModelAttribute("nuevoCuesEstudiante") CuesEstudiante cuesEstudianteConDatos,
+	public ModelAndView guardarCuestionarioERealizado(@ModelAttribute("nuevoCuesEstudiante") CuesEstudiante nuevoCuesEstudiante,
 			@RequestParam Map<String,String> respuestasSeleccionadas, @PathVariable(name="id_Cuestionario") Integer idCuestionario ) { 
 		
 		ModelAndView resultadoCuestionario = new ModelAndView("resultadoCuestionario");
 		
-		GRUPO3.warn(cuesEstudianteConDatos);
-		System.out.println(cuesEstudianteConDatos.getId_CuesEstudiante());
-		System.out.println(cuesEstudianteConDatos.getEstudiante());
-		
+		System.out.println(nuevoCuesEstudiante.getClass());
+			
 		try {
-			
-			cuesEstudianteConDatos.getCuestionario().setPuntajeTotal(cuesPreguntasService.obtenerPuntajeTotalDeUnCuestionario(idCuestionario));
-			cuesEstudianteConDatos.setFechaRealizada(cuesEstudianteService.fechaActual());
-			cuesEstudianteConDatos.setPuntajeObtenido(cuesEstudianteService.calcularPuntajeObtenido(cuesPreguntasService.ListarRespuestasDePreguntas(idCuestionario), respuestasSeleccionadas, cuesPreguntasService.ListadoDePuntajes(idCuestionario)));
-            cuesEstudianteConDatos.setCuestionario(cuestionarioRepository.findById(idCuestionario).get());
-			cuesEstudianteService.cargarCuesEstudiante(cuesEstudianteConDatos);
-			
+		
+		nuevoCuesEstudiante.setFechaRealizada(cuesEstudianteService.fechaActual());
+		nuevoCuesEstudiante.setPuntajeObtenido(cuesEstudianteService.calcularPuntajeObtenido(idCuestionario, respuestasSeleccionadas));
+        nuevoCuesEstudiante.setCuestionario(cuestionarioRepository.findById(idCuestionario).get());
+        cuesEstudianteService.cargarCuesEstudiante(nuevoCuesEstudiante);
 		}catch(Exception e) {
-			resultadoCuestionario.addObject("GuardarCuesEstudianteErrorMessage", e.getMessage());
+			System.out.println(e.getMessage());
 		}
-			resultadoCuestionario.addObject("cuesEstudiante", cuesEstudianteConDatos);
-			
+		resultadoCuestionario.addObject("nuevoCuesEstudiante", nuevoCuesEstudiante);
+		
+		System.out.println(nuevoCuesEstudiante.getId_CuesEstudiante());
+		System.out.println(nuevoCuesEstudiante.getFechaRealizada());
+		System.out.println(nuevoCuesEstudiante.getPuntajeObtenido());
+		System.out.println(nuevoCuesEstudiante.getCuestionario());
+		System.out.println(nuevoCuesEstudiante.getEstudiante());
 		return resultadoCuestionario;
 	}
 	

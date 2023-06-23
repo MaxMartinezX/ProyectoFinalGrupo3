@@ -12,9 +12,9 @@
 	<div class="card" style="width: 18rem;" >
   <div class="card-body">
    
-    <h5 class="card-title" th:text="${cuesEstudiante.estudiante.nombre + cuesEstudiante.estudiante.apellido}"></h5>
-    <!-- <h6 class="card-subtitle mb-2 text-body-secondary" th:text="${cuesEstudiante.cuestionario.titulo}"></h6> -->
-    <!--  <h1 class="card-text" th:text="${cuesEstudiante.puntajeObtenido + '/' + cuesEstudiante.cuestionario.puntajeTotal}" ></h1>-->
+    <h5 class="card-title" th:text="${nuevoCuesEstudiante.estudiante.nombre + nuevoCuesEstudiante.estudiante.apellido}"></h5>
+    <!-- <h6 class="card-subtitle mb-2 text-body-secondary" th:text="${nuevoCuesEstudiante.cuestionario.titulo}"></h6> -->
+    <!--  <h1 class="card-text" th:text="${nuevoCuesEstudiante.puntajeObtenido} + ' / ' + ${nuevoCuesEstudiante.cuestionario.puntajeTotal}"></h1>-->
     <a class="btn btn-primary" th:href="@{/index}" >Volver al Inicio</a>
     <a class="btn btn-primary" th:ref="@{/elegirCuestionario}">Elegir otro cuestionario</a>
   </div>
