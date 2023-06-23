@@ -1,6 +1,5 @@
 package ar.edu.unju.edm.controller;
 
-import java.util.List;
 import java.util.Map;
 
 import org.apache.juli.logging.Log;
@@ -15,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import ar.edu.unju.edm.model.CuesEstudiante;
-import ar.edu.unju.edm.model.Cuestionario;
 import ar.edu.unju.edm.repository.CuestionarioRepository;
 import ar.edu.unju.edm.service.ICuesEstudianteService;
 import ar.edu.unju.edm.service.ICuesPreguntaService;
