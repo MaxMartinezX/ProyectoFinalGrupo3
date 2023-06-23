@@ -4,7 +4,7 @@
 	<nav th:fragment="header" class="navbar navbar-expand-lg bg-primary sticky-top mb-3">
 	  <div class="container-fluid">
 	    <a class="navbar-brand" th:href="@{/home}">
-	      <img th:src="@{/images/LogoResolve.png}" alt="Reverse" height="45">
+	      <img th:src="@{/images/LogoPink.png}" alt="Reverse" height="45">
 	    </a>
 	    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
 	      <span class="navbar-toggler-icon"></span>
@@ -16,16 +16,16 @@
 	            Cuestionarios
 	          </a>
 	          <ul class="dropdown-menu" aria-labelledby="cuestionariosDropdown">
-	            <li><a class="dropdown-item" th:href="@{/cuestionario}">Lista de Cuestionarios</a></li>
-	            <li><a class="dropdown-item" th:href="@{/listadoCuestionarios}">Crear Cuestionario</a></li>
+	            <li><a class="dropdown-item" th:href="@{/listadoCuestionarios}">Lista de Cuestionarios</a></li>
+	            <li><a class="dropdown-item" th:href="@{/cuestionario}">Crear Cuestionario</a></li>
 	            <li><a class="dropdown-item" th:href="@{/pregunta}">Crear Pregunta</a></li>
 	          </ul>
 	        </li>
 	        <li class="nav-item">
-	          <a class="nav-link" th:href="@{/docente}">Docentes</a>
+	          <a class="nav-link" th:href="@{/listadoDocente}">Docentes</a>
 	        </li>
 	        <li class="nav-item">
-	          <a class="nav-link" th:href="@{/estudiante}">Estudiantes</a>
+	          <a class="nav-link" th:href="@{/listadoEstudiante}">Estudiantes</a>
 	        </li>
 	      </ul>
 	      <button class="btn btn-secondary" type="button">Iniciar Sesión</button>
