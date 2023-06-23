@@ -10,6 +10,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import ar.edu.unju.edm.service.imp.LoginService;
+import ar.edu.unju.edm.Autenticacion;
 
 @Configuration
 @EnableWebSecurity
@@ -18,14 +19,17 @@ public class ConfiguracionWeb extends WebSecurityConfigurerAdapter {
 	@Autowired
 	private Autenticacion autenticacion;
 	
-	String[] resources = new String[] { "/include/**","/css/**","/icons/**","/img/**","/js/**","/layer/**", "/webjars/**"};
+	String[] resources = new String[] { "/include/**","/css/**","/icons/**","/img/**","/imges/**","/js/**","/layer/**", "/webjars/**"};
 
 	protected void configure(HttpSecurity http) throws Exception{
 		http
 		    .authorizeRequests()
 		    .antMatchers(resources).permitAll()
-		    .antMatchers("/","index","").permitAll()
-		    .antMatchers().hasAuthority("ADMIN")
+		    //.antMatchers("/","index","/login","/home","/principal","/elegirCuestionario","/resolverCuestionario/{id_Cuestionario}","/resultadoDeCuestionario/{id_Cuestionario}","/cuestionariosRealizados","/listaDeEstudiantes","/listaDeDocentes").permitAll()
+		    //saquen de comentarios este para que puedan crear un docente con contraseña y luego dejen el que estaba
+		    .antMatchers("/","index","/docente","/guardarDocente","/login","/home","/principal","/elegirCuestionario","/resolverCuestionario/{id_Cuestionario}","/resultadoDeCuestionario/{id_Cuestionario}","/cuestionariosRealizados","/listaDeEstudiantes","/listaDeDocentes").permitAll()
+		    .antMatchers("/**").hasAuthority("ADMIN")
+		    //"/","index","/login","/home","/principal","/cuestionario","/guardarCuestionario","/listadoCuestionarios","/cuestionarioConPreguntas/{id_Cuestionario}","/cuestionarioPregunta/{id_Cuestionario}","/guardarCuestionarioPregunta/{id_Cuestionario}","/elegirCuestionario","/resolverCuestionario/{id_Cuestionario}","/resultadoDeCuestionario/{id_Cuestionario}","/cuestionariosRealizados","/pregunta","/guardarPregunta","/eliminarPregunta/{idPregunta}","/modificarPregunta/{idPregunta}","/estudiante","/listadoEstudiante","/guardarEstudiante","/modificarEstudiante/{id_Estudiante}","/modificarEstudiante","/eliminarEstudiante/{id_Estudiante}","/docente","/listadoDocente","/guardarDocente","/modificarDocente/{id_Docente}","/modificarDocente","/eliminarDocente/{id_Docente}"
 		    .anyRequest().authenticated()
 		    .and()
 		    .formLogin()
@@ -34,8 +38,9 @@ public class ConfiguracionWeb extends WebSecurityConfigurerAdapter {
 		    	.successHandler(autenticacion)
 		    	.failureUrl("/login?error=true")
 		    	.usernameParameter("id_Docente")
-		    	.usernameParameter("contrasenia")
+		    	.passwordParameter("contrasenia")
 		    	.and()
+		    	.csrf().disable()
 		    .logout()
 		    	.permitAll()
 		    	.logoutSuccessUrl("/login?logout");

@@ -54,6 +54,7 @@ public class CuesPreguntaController {
 		GRUPO3.warn("Guardando preguntas al Cuestionario");
 	  cuesPreguntaService.cargarPreguntasACuestionario(preguntasSeleccionadas, puntajesSeleccionados, id);
 	  cuestionarioRepository.findById(id).get().setPuntajeTotal(cuesPreguntaService.obtenerPuntajeTotalDeUnCuestionario(id));
+	  System.out.println( cuestionarioRepository.findById(id).get() + "HOLAAAAAAAAAAAA");
 		
 		return "redirect:/listadoCuestionarios";
 	}

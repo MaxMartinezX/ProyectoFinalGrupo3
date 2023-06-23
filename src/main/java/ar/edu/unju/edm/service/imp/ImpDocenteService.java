@@ -22,7 +22,7 @@ public class ImpDocenteService implements IDocenteService {
 	@Override
 	public void cargarDocente(Docente unDocente) {
 		unDocente.setEstado(true);
-		unDocente.setTipo("USUARIO");
+		unDocente.setTipo("ADMIN");
 		
 		String pw = unDocente.getContrasenia();
 		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder(4);

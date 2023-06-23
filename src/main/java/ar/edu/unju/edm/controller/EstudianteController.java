@@ -52,6 +52,15 @@ public class EstudianteController {
 		return listadoEstudiantes;
 	}
 	
+	@GetMapping("/listaDeEstudiantes")
+	public ModelAndView mostrarEstudiantes(){
+		
+		ModelAndView listaDeEstudiantes = new ModelAndView("listaDeEstudiantes");
+		listaDeEstudiantes.addObject("estudianteListado", unServicio.listarEstudiantes());
+		
+		return listaDeEstudiantes;
+	}
+	
 	@PostMapping("/guardarEstudiante")
 	public ModelAndView guardarEstudiante(@Valid @ModelAttribute("nuevoEstudiante") Estudiante nEstudiante, BindingResult resultado) {
 		
