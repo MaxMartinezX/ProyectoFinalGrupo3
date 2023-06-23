@@ -34,6 +34,9 @@ public class ImpCuesPreguntaService implements ICuesPreguntaService{
 	
 	@Override
 	public void cargarPreguntasACuestionario (List<Integer> preguntasSeleccionadas,List<Integer> puntajesSeleccionados, Integer id_Cuestionario){
+		
+		//cuesPreguntaRepository.deleteAll(cuesPreguntaRepository.findAllByCuestionario(cuestionarioRepository.findById(id_Cuestionario).get()));
+			
 		for(int i=0;i<preguntasSeleccionadas.size();i++) {
 			CuesPregunta auxiliar= new CuesPregunta();
 			auxiliar.setPregunta(preguntaRepository.findById(preguntasSeleccionadas.get(i)).get());
