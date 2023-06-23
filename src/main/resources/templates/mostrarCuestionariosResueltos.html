@@ -14,10 +14,9 @@
 					<div class="card" style="width: 18rem;" th:each="cuesEst: ${cuesEstudianteListado}" >
 					 	 <div class="card-body">
 						    <h5 class="card-title" th:text="${cuesEst.cuestionario.titulo}"></h5>
-						    <h6 class="card-subtitle mb-2 text-body-secondary" th:text="${cuesEst.estudiante.nombre + cuesEst.estudiante.apellido}"></h6>
+						    <h6 class="card-subtitle mb-2 text-body-secondary" th:text="${cuesEst.estudiante.nombre + ' ' + cuesEst.estudiante.apellido}"></h6>
 						    <p class="card-text" th:text="${cuesEst.fechaRealizada}" ></p>
-						    <p class="card-text" th:text="${cuesEst.puntajeObtenido}" ></p>
-						    <p class="card-text" th:text="${cuesEst.cuestionario.puntajeTotal}" ></p>
+						    <p class="card-text" th:text="${cuesEst.puntajeObtenido} + ' / '+ ${cuesEst.cuestionario.puntajeTotal}" ></p>
 						    
 					 	</div>
 					</div>

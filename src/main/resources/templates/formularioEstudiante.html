@@ -15,13 +15,13 @@
 				
         <div class="mb-e">
             <label class="form-label" for="fnombre">Nombre:</label>
-            <input type="text" class="form-control" id="nombreID" title="Ingresa un nombre valido, sin números o caracteres especiales." pattern="[A-Za-z\s]+" th:field="*{nombre}" required>
+            <input type="text" class="form-control" id="nombreID" title="Ingresa un nombre válido, sin números o caracteres especiales." pattern="[A-Za-z\s]+" th:field="*{nombre}" required>
 		 </div>
         
         <div class="mb-e">
             <label class="form-label" for="fapellido">Apellido:</label>
-            <input type="text" th:field="*{apellido}" class="form-control" required/><br/>
-        </div>
+            <input type="text" class="form-control" id="apellidoID" title="Ingresa un apellido válido, sin números o caracteres especiales." pattern="[A-Za-z\s]+" th:field="*{apellido}" required>
+		</div>
         
         <div class="mb-e">
             <label class="form-label" for="fdni">DNI:</label>
@@ -30,7 +30,7 @@
         
         <div class="mb-e">
             <label class="form-label" for="ftelefono">Número de Télefono:</label>
-            <input type="tel" class="form-control" id="telID" th:field="*{telefono}" pattern="\d{10}" title="Ingresa un número de 10 dígitos." required>		    
+            <input type="tel" class="form-control" id="telID" th:field="*{telefono}" pattern="\d{10}" title="Ingresa un número telefónico válido, de 10 dígitos." required>		    
 		</div>
         
         <div class="mb-e">

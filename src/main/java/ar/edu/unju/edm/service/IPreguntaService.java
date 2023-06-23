@@ -11,5 +11,6 @@ public interface IPreguntaService {
 	public void cargarPregunta(Pregunta unaPregunta);
 	public void eliminarPregunta(Integer idPregunta);
 	public ArrayList<Pregunta> listarPreguntas ();
+	public Pregunta listarUnaPregunta(Integer idPregunta);
 	public Pregunta modificarPregunta (Integer idPregunta);
 }
