@@ -20,7 +20,7 @@ import javax.validation.Valid;
 @Controller
 public class EstudianteController {
 
-	private static final Log Group3 = LogFactory.getLog(EstudianteController.class);
+	private static final Log GRUPO3 = LogFactory.getLog(EstudianteController.class);
 	
 	
 	@Autowired
@@ -39,7 +39,17 @@ public class EstudianteController {
 		 cargaEstudiante.addObject("listaDivisiones", divisiones);
 		 
 		 cargaEstudiante.addObject("band", false);
+		 GRUPO3.warn("Cargando nuevo estudiante");
 		return cargaEstudiante;
+	}
+	
+	@GetMapping("/listadoEstudiante")
+	public ModelAndView mostrarEstudiante(){
+		
+		ModelAndView listadoEstudiantes = new ModelAndView("mostrarEstudiantes");
+		listadoEstudiantes.addObject("estudianteListado", unServicio.listarEstudiantes());
+		
+		return listadoEstudiantes;
 	}
 	
 	@PostMapping("/guardarEstudiante")
@@ -53,14 +63,16 @@ public class EstudianteController {
 		
 		ModelAndView listadoEstudiantes = new ModelAndView("mostrarEstudiantes");
 		
-			Group3.warn("Mostrando nuevo Estudiante"+nEstudiante.getNombre());
+			GRUPO3.warn("Mostrando nuevo Estudiante"+nEstudiante.getNombre());
 		
 		try {
+			GRUPO3.warn("Guardando Estudiante");
 			unServicio.cargarEstudiante(nEstudiante);
 		}catch(Exception e) {
 			listadoEstudiantes.addObject("CargadoEstudianteErrorMessage", e.getMessage());
+			GRUPO3.error(e);
 		}
-		
+				
 		listadoEstudiantes.addObject("estudianteListado", unServicio.listarEstudiantes());
 		
 		return listadoEstudiantes;
@@ -74,9 +86,11 @@ public class EstudianteController {
 		ModelAndView modificaEstudiante = new ModelAndView("formularioEstudiante");
 	
 		try {
+			GRUPO3.warn("Modificando Estudiante");
 			modificaEstudiante.addObject("nuevoEstudiante", unServicio.mostrarUnEstudiante(id_Est));
 		}catch(Exception e) {
 			modificaEstudiante.addObject("modificarEstudianteErrorMessage", e.getMessage());
+			GRUPO3.error(e);
 		}
 		
 		 char[] divisiones = {'A', 'B', 'C', 'D'};
@@ -90,12 +104,14 @@ public class EstudianteController {
 	public ModelAndView modificarEstudiante(@ModelAttribute("nuevoEstudiante") Estudiante unEstudiante ) {
 		ModelAndView listadoEditado = new ModelAndView("mostrarEstudiantes");
 		
-			Group3.warn("Mostrando Estudiante modificado: "+unEstudiante.getId_Estudiante());
+			GRUPO3.warn("Mostrando Estudiante modificado: "+unEstudiante.getId_Estudiante());
 		
 		try {
+			GRUPO3.warn("Guardando modificaciones de Estudiantes");
 			unServicio.cargarEstudiante(unEstudiante);
 		}catch(Exception e) {
 			listadoEditado.addObject("cargaEstudianteErrorMessage", e.getMessage());
+			GRUPO3.error(e);
 		}
 		
 		listadoEditado.addObject("estudianteListado", unServicio.listarEstudiantes());
@@ -109,15 +125,18 @@ public class EstudianteController {
 		ModelAndView eliminarEstudiante = new ModelAndView("mostrarEstudiantes");
 		
 		try {
+			GRUPO3.warn("Eliminando Estudiante");
 			unServicio.eliminarUnEstudiante(id);
 		}catch(Exception e) {
 			eliminarEstudiante.addObject("eliminarEstudianteErrorMessage", e.getMessage());
+			GRUPO3.error(e);
 		}
 		
 		try {
 			eliminarEstudiante.addObject("estudianteListado", unServicio.listarEstudiantes());
 		}catch(Exception e) {
 			eliminarEstudiante.addObject("listarEstudianteErrorMessage", e.getMessage());
+			GRUPO3.error(e);
 		}
 		
 		return eliminarEstudiante;

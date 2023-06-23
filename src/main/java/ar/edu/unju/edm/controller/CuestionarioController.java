@@ -38,7 +38,7 @@ public class CuestionarioController {
 		ModelAndView cargaCuestionario = new ModelAndView("formularioCuestionario");
 		cargaCuestionario.addObject("nuevoCuestionario", unCuestionario);
 		cargaCuestionario.addObject("listadoDocentes", docenteService.listarDocentes());
-	     
+	    GRUPO3.warn("Cargando nuevo cuestionario");
 		return cargaCuestionario;
 	}
 	
@@ -58,6 +58,7 @@ public class CuestionarioController {
 			cuestionarioService.cargarCuestionario(unCuestionario);
 		}catch(Exception e) {
 			listadoCuestionarios.addObject("cargarCuestionarioErrorMessage", e.getMessage());
+			GRUPO3.error(e);
 		}
 		
 		listadoCuestionarios.addObject("cuestionarioListado", cuestionarioService.listarCuestionarios());
@@ -67,7 +68,7 @@ public class CuestionarioController {
 	
 	@GetMapping("/listadoCuestionarios")
 	public ModelAndView mostrarCuestionarios(){
-		
+		GRUPO3.warn("Lista de Cuestionarios");
 		ModelAndView listadoCuestionarios = new ModelAndView("mostrarCuestionarios");
 		listadoCuestionarios.addObject("cuestionarioListado", cuestionarioService.listarCuestionarios());
 		
@@ -86,6 +87,7 @@ public class CuestionarioController {
 			listadoCuestionarios.addObject("preguntas", cuesPreguntaService.ListarPreguntasDeUnCuestionario(id));
 		}catch(Exception e) {
 			listadoCuestionarios.addObject("cargaCuestionarioConPreguntasErrorMessage", e.getMessage());
+			GRUPO3.error(e);
 		}
 		
 		listadoCuestionarios.addObject("cuestionarioListado", cuestionarioService.listarCuestionarios());
