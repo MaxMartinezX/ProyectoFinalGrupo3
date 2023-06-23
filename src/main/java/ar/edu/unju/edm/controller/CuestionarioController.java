@@ -15,7 +15,7 @@ import ar.edu.unju.edm.model.Cuestionario;
 import ar.edu.unju.edm.service.ICuesPreguntaService;
 import ar.edu.unju.edm.service.ICuestionarioService;
 import ar.edu.unju.edm.service.IDocenteService;
-import jakarta.validation.Valid;
+import javax.validation.Valid;
 
 @Controller
 public class CuestionarioController {

@@ -15,7 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import ar.edu.unju.edm.model.Estudiante;
 import ar.edu.unju.edm.service.IEstudianteService;
-import jakarta.validation.Valid;
+import javax.validation.Valid;
 
 @Controller
 public class EstudianteController {

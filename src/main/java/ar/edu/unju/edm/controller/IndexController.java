@@ -5,18 +5,18 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import ar.edu.unju.edm.model.Estudiante;
+import ar.edu.unju.edm.model.Docente;
 
 @Controller
 public class IndexController {
 	
 	@Autowired
-	Estudiante unEstudiante;
+	Docente unDocente;
 	
-	@GetMapping({"/","index","/home"})
+	@GetMapping({"/","/index","/home","login"})
 	public ModelAndView cargarPrincipal(){
 		ModelAndView principal = new ModelAndView("index");
-		principal.addObject("alumno", unEstudiante);
+		principal.addObject("docenteParaLoguear", unDocente);
 		
 		return principal;
 	}

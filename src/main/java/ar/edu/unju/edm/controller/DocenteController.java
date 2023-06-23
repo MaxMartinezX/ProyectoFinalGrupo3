@@ -18,7 +18,7 @@ import org.apache.juli.logging.LogFactory;
 
 import ar.edu.unju.edm.model.Docente;
 import ar.edu.unju.edm.service.IDocenteService;
-import jakarta.validation.Valid;
+import javax.validation.Valid;
 
 @Controller
 public class DocenteController {

@@ -2,16 +2,16 @@ package ar.edu.unju.edm.model;
 
 import org.springframework.stereotype.Component;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Lob;
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Lob;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 @Component
 @Entity
@@ -20,7 +20,7 @@ public class Docente {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id_Docente;
 	
-	private String contraseña;
+	private String contrasenia;
 	
 	@NotBlank(message= "nombre is required")
 	@Size(max=40)
@@ -56,15 +56,17 @@ public class Docente {
 	@Column(name="foto",columnDefinition="BLOB")
 	private String foto;
 	
+	private String tipo;
+	
 	private Boolean estado;
 	
 	public Docente() {
 	}
 
-	public Docente(String contraseña, String nombre, String apellido, Integer dni, String telefono, String direccion,
+	public Docente(String contrasenia, String nombre, String apellido, Integer dni, String telefono, String direccion,
 			String localidad, String materia, String correo, Integer legajo, String foto, Boolean estado) {
 		super();
-		this.contraseña = contraseña;
+		this.contrasenia = contrasenia;
 		this.nombre = nombre;
 		this.apellido = apellido;
 		this.dni = dni;
@@ -162,12 +164,12 @@ public class Docente {
 		this.estado = estado;
 	}
 
-	public String getContraseña() {
-		return contraseña;
+	public String getContrasenia() {
+		return contrasenia;
 	}
 
-	public void setContraseña(String contraseña) {
-		this.contraseña = contraseña;
+	public void setContrasenia(String contraseña) {
+		this.contrasenia = contraseña;
 	}
 
 	public String getCorreo() {
@@ -176,6 +178,14 @@ public class Docente {
 
 	public void setCorreo(String correo) {
 		this.correo = correo;
+	}
+
+	public String getTipo() {
+		return tipo;
+	}
+
+	public void setTipo(String tipo) {
+		this.tipo = tipo;
 	}
 	
 	

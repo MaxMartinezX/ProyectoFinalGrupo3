@@ -2,7 +2,7 @@ package ar.edu.unju.edm.model;
 
 import org.springframework.stereotype.Component;
 
-import jakarta.persistence.*;
+import javax.persistence.*;
 
 @Component
 @Entity

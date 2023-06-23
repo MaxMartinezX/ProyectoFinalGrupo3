@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import ar.edu.unju.edm.model.Docente;
@@ -21,6 +22,11 @@ public class ImpDocenteService implements IDocenteService {
 	@Override
 	public void cargarDocente(Docente unDocente) {
 		unDocente.setEstado(true);
+		unDocente.setTipo("USUARIO");
+		
+		String pw = unDocente.getContrasenia();
+		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder(4);
+		unDocente.setContrasenia(encoder.encode(pw));
 		docenteRepository.save(unDocente);
 	}
 
