@@ -73,11 +73,12 @@ public class ImpCuesPreguntaService implements ICuesPreguntaService{
 		Cuestionario aux = cuestionarioRepository.findById(id_Cuestionario).get();
         List<CuesPregunta> cuesPreguntas = cuesPreguntaRepository.findAllByCuestionario(aux);
         List<Pregunta> preguntas = new ArrayList<>();
-        for (CuesPregunta cuesPregunta : cuesPreguntas) {
-            preguntas.add(cuesPregunta.getPregunta());
-        }
+        for(int i=0;i<cuesPreguntas.size();i++) {
+			preguntas.add(cuesPreguntas.get(i).getPregunta());
+		}
         return preguntas;
     }
+	
 	@Override
 	public List<Integer> ListarRespuestasDePreguntas(Integer id_Cuestionario){
 		List<Pregunta> preguntas = ListarPreguntasDeUnCuestionario(id_Cuestionario);
