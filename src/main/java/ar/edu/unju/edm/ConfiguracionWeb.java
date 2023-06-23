@@ -25,9 +25,9 @@ public class ConfiguracionWeb extends WebSecurityConfigurerAdapter {
 		http
 		    .authorizeRequests()
 		    .antMatchers(resources).permitAll()
-		    //.antMatchers("/","index","/login","/home","/principal","/elegirCuestionario","/resolverCuestionario/{id_Cuestionario}","/resultadoDeCuestionario/{id_Cuestionario}","/cuestionariosRealizados","/listaDeEstudiantes","/listaDeDocentes").permitAll()
+		    .antMatchers("/","index","/login","/home","/principal","/elegirCuestionario","/resolverCuestionario/{id_Cuestionario}","/resultadoDeCuestionario/{id_Cuestionario}","/cuestionariosRealizados","/listaDeEstudiantes","/listaDeDocentes").permitAll()
 		    //saquen de comentarios este para que puedan crear un docente con contraseña y luego dejen el que estaba
-		    .antMatchers("/","index","/docente","/guardarDocente","/login","/home","/principal","/elegirCuestionario","/resolverCuestionario/{id_Cuestionario}","/resultadoDeCuestionario/{id_Cuestionario}","/cuestionariosRealizados","/listaDeEstudiantes","/listaDeDocentes").permitAll()
+		    //.antMatchers("/","index","/docente","/guardarDocente","/login","/home","/principal","/elegirCuestionario","/resolverCuestionario/{id_Cuestionario}","/resultadoDeCuestionario/{id_Cuestionario}","/cuestionariosRealizados","/listaDeEstudiantes","/listaDeDocentes").permitAll()
 		    .antMatchers("/**").hasAuthority("ADMIN")
 		    //"/","index","/login","/home","/principal","/cuestionario","/guardarCuestionario","/listadoCuestionarios","/cuestionarioConPreguntas/{id_Cuestionario}","/cuestionarioPregunta/{id_Cuestionario}","/guardarCuestionarioPregunta/{id_Cuestionario}","/elegirCuestionario","/resolverCuestionario/{id_Cuestionario}","/resultadoDeCuestionario/{id_Cuestionario}","/cuestionariosRealizados","/pregunta","/guardarPregunta","/eliminarPregunta/{idPregunta}","/modificarPregunta/{idPregunta}","/estudiante","/listadoEstudiante","/guardarEstudiante","/modificarEstudiante/{id_Estudiante}","/modificarEstudiante","/eliminarEstudiante/{id_Estudiante}","/docente","/listadoDocente","/guardarDocente","/modificarDocente/{id_Docente}","/modificarDocente","/eliminarDocente/{id_Docente}"
 		    .anyRequest().authenticated()
