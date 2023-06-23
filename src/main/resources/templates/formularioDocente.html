@@ -26,6 +26,10 @@
 				    <input type="text" class="form-control" id="apellidoID" th:field="*{apellido}" pattern="[A-Za-z\s]+" title="Ingresa un apellido valido, sin números o caracteres especiales." required>
 				</div>
 				<div class="col-md-12">
+				    <label for="contraseniaID" class="form-label">Contraseña</label>
+				    <input type="text" class="form-control" id="contraseniaID" th:field="*{contrasenia}" title="Ingresa una contraseña." required>
+				</div>
+				<div class="col-md-12">
 				    <label for="dniID" class="form-label">DNI</label>
 				    <input type="number" class="form-control" id="dniID" th:field="*{dni}" min="1000000" max="99999999" title="Ingresa un número de 8 digitos." required>
 				</div>

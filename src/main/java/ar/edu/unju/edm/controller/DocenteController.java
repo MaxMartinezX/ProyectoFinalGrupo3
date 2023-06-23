@@ -18,7 +18,7 @@ import org.apache.juli.logging.LogFactory;
 
 import ar.edu.unju.edm.model.Docente;
 import ar.edu.unju.edm.service.IDocenteService;
-import jakarta.validation.Valid;
+import javax.validation.Valid;
 
 @Controller
 public class DocenteController {
@@ -44,6 +44,16 @@ public class DocenteController {
 	@GetMapping("/listadoDocente")
 	public ModelAndView mostrarDocente() {
 		ModelAndView listadoDocentes = new ModelAndView("mostrarDocentes");
+		listadoDocentes.addObject("docenteListado", unDocente);
+		
+		listadoDocentes.addObject("docenteListado",unServicio.listarDocentes());
+		
+		return listadoDocentes;
+	}
+	
+	@GetMapping("/listaDeDocentes")
+	public ModelAndView mostrarDocentes() {
+		ModelAndView listadoDocentes = new ModelAndView("listaDeDocentes");
 		listadoDocentes.addObject("docenteListado", unDocente);
 		
 		listadoDocentes.addObject("docenteListado",unServicio.listarDocentes());
