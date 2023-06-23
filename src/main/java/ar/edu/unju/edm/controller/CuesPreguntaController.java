@@ -2,6 +2,8 @@ package ar.edu.unju.edm.controller;
 
 import java.util.List;
 
+import org.apache.juli.logging.Log;
+import org.apache.juli.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -31,6 +33,8 @@ public class CuesPreguntaController {
 	@Autowired
 	CuestionarioRepository cuestionarioRepository;
 	
+	private static final Log GRUPO3 = LogFactory.getLog(CuesEstudianteController.class);
+	
 	@GetMapping("/cuestionarioPregunta/{id_Cuestionario}")
 	public ModelAndView cargarCuesPregunta(@PathVariable(name="id_Cuestionario") Integer id) {
 		
@@ -40,13 +44,14 @@ public class CuesPreguntaController {
 		unCuesP.addObject("listadoDeNoSeleccionadas", cuesPreguntaService.ListarPreguntasNoSeleccionadas( cuesPreguntaService.ListarPreguntasDeUnCuestionario(id), preguntaService.listarPreguntas()));
 		unCuesP.addObject("listadoPreguntas", preguntaService.listarPreguntas());
 		
+		GRUPO3.warn("Cargando preguntas al cuestionario");
 		return unCuesP;
 	}
 	
 	@PostMapping("/guardarCuestionarioPregunta/{id_Cuestionario}")
 	public String guardarCuesPregunta(@ModelAttribute("cuesPregunta") CuesPregunta CuestionarioP, @RequestParam("preguntasSeleccionada") List<Integer> preguntasSeleccionadas, @RequestParam("puntajesSeleccionados") List<Integer> puntajesSeleccionados, @PathVariable(name="id_Cuestionario") Integer id) {
 		
-	  
+		GRUPO3.warn("Guardando preguntas al Cuestionario");
 	  cuesPreguntaService.cargarPreguntasACuestionario(preguntasSeleccionadas, puntajesSeleccionados, id);
 	  cuestionarioRepository.findById(id).get().setPuntajeTotal(cuesPreguntaService.obtenerPuntajeTotalDeUnCuestionario(id));
 		

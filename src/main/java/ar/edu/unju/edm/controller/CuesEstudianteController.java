@@ -52,7 +52,7 @@ public class CuesEstudianteController {
 	public ModelAndView cargarCuesEstudiante () {
 		ModelAndView cargaCuesEstudiante = new ModelAndView("mostrarCuestionariosAEstudiantes");
 		cargaCuesEstudiante.addObject("cuestionarios", cuestionarioService.listarCuestionarios());
-		
+		GRUPO3.warn("Elegir Cuestionario");
 		return cargaCuesEstudiante;
 	}
 	
@@ -62,14 +62,14 @@ public class CuesEstudianteController {
 	@GetMapping("/resolverCuestionario/{id_Cuestionario}")
 	public ModelAndView resolverCuesEstudiante(@PathVariable(name="id_Cuestionario")  Integer idCuesElegido) {
 		ModelAndView resolverCuestionario = new ModelAndView("resolverCuestionario");
-			
+			GRUPO3.warn("Estudiante resuelve cuestionario");
 			resolverCuestionario.addObject("nuevoCuesEstudiante", unCuesEstudiante);
 			resolverCuestionario.addObject("listadoEstudiantes", estudianteService.listarEstudiantes());
 			
 			resolverCuestionario.addObject("cuestionario", cuestionarioService.mostrarUnCuestionario(idCuesElegido));
 			resolverCuestionario.addObject("preguntas", cuesPreguntasService.ListarPreguntasDeUnCuestionario(idCuesElegido));
 			
-			
+			GRUPO3.warn("Nueva resolucion de Cuestionario");
 		return resolverCuestionario;
 	}
 	
@@ -81,7 +81,8 @@ public class CuesEstudianteController {
 			@RequestParam Map<String,String> respuestasSeleccionadas, @PathVariable(name="id_Cuestionario") Integer idCuestionario ) { 
 		
 		ModelAndView resultadoCuestionario = new ModelAndView("resultadoCuestionario");
-			
+
+		GRUPO3.warn("Cuestionario realizado");
 		try {
 		
 		nuevoCuesEstudiante.setFechaRealizada(cuesEstudianteService.fechaActual());
@@ -90,8 +91,10 @@ public class CuesEstudianteController {
         cuesEstudianteService.cargarCuesEstudiante(nuevoCuesEstudiante);
 		}catch(Exception e) {
 			System.out.println(e.getMessage());
+			GRUPO3.error(e);
 		}
 		resultadoCuestionario.addObject("nuevoCuesEstudiante", nuevoCuesEstudiante);
+    
 		return resultadoCuestionario;
 	}
 	
@@ -99,7 +102,7 @@ public class CuesEstudianteController {
 	//mostrando todos los cuesEstudiantes
 	@GetMapping("/cuestionariosRealizados")
 	public ModelAndView guardarCuesEstudiante () {
-		
+		GRUPO3.warn("Listando todos los Cuestionarios");
 		ModelAndView listadoCuesEstudiante = new ModelAndView("mostrarCuestionariosResueltos");
 		
 		listadoCuesEstudiante.addObject("cuesEstudianteListado", cuesEstudianteService.listarTodosCuestionariosEstudiantes() );
