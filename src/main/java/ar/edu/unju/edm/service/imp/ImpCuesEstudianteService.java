@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import ar.edu.unju.edm.model.CuesEstudiante;
+import ar.edu.unju.edm.model.Pregunta;
 import ar.edu.unju.edm.repository.CuesEstudianteRepository;
 import ar.edu.unju.edm.service.ICuesEstudianteService;
 import ar.edu.unju.edm.service.ICuesPreguntaService;
@@ -70,16 +71,17 @@ public class ImpCuesEstudianteService implements ICuesEstudianteService {
 
 	@Override
 	public Integer calcularPuntajeObtenido(Integer idCuestionario, Map<String,String> opcionesElegidas) {
+		List<Pregunta> preguntas = cuesPreguntaService.ListarPreguntasDeUnCuestionario(idCuestionario);
 		List<Integer> opcionesCorrectas = cuesPreguntaService.ListarRespuestasDePreguntas(idCuestionario);
 		List<Integer> puntajes= cuesPreguntaService.ListadoDePuntajes(idCuestionario);
 		Integer puntajeObtenido=0;
-		int i=0;
-		for(Map.Entry<String, String> opcion: opcionesElegidas.entrySet()) {
-			Integer aux=Integer.parseInt(opcion.getValue());
+		
+		for(int i=0;i<preguntas.size();i++) {
+			String opcion= opcionesElegidas.get("respuestasSeleccionadas[" + preguntas.get(i).getIdPregunta() + "]");
+			Integer aux= Integer.parseInt(opcion);
 			if(aux==opcionesCorrectas.get(i)) {
 				puntajeObtenido+=puntajes.get(i);
 			}
-			i++;
 		}
 		return puntajeObtenido;
 	}

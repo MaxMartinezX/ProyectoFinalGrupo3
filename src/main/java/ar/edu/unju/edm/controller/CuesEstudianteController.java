@@ -81,25 +81,17 @@ public class CuesEstudianteController {
 			@RequestParam Map<String,String> respuestasSeleccionadas, @PathVariable(name="id_Cuestionario") Integer idCuestionario ) { 
 		
 		ModelAndView resultadoCuestionario = new ModelAndView("resultadoCuestionario");
-		
-		System.out.println(nuevoCuesEstudiante.getClass());
 			
 		try {
 		
 		nuevoCuesEstudiante.setFechaRealizada(cuesEstudianteService.fechaActual());
-		nuevoCuesEstudiante.setPuntajeObtenido(cuesEstudianteService.calcularPuntajeObtenido(idCuestionario, respuestasSeleccionadas));
         nuevoCuesEstudiante.setCuestionario(cuestionarioRepository.findById(idCuestionario).get());
+        nuevoCuesEstudiante.setPuntajeObtenido(cuesEstudianteService.calcularPuntajeObtenido(idCuestionario, respuestasSeleccionadas));
         cuesEstudianteService.cargarCuesEstudiante(nuevoCuesEstudiante);
 		}catch(Exception e) {
 			System.out.println(e.getMessage());
 		}
 		resultadoCuestionario.addObject("nuevoCuesEstudiante", nuevoCuesEstudiante);
-		
-		System.out.println(nuevoCuesEstudiante.getId_CuesEstudiante());
-		System.out.println(nuevoCuesEstudiante.getFechaRealizada());
-		System.out.println(nuevoCuesEstudiante.getPuntajeObtenido());
-		System.out.println(nuevoCuesEstudiante.getCuestionario());
-		System.out.println(nuevoCuesEstudiante.getEstudiante());
 		return resultadoCuestionario;
 	}
 	
