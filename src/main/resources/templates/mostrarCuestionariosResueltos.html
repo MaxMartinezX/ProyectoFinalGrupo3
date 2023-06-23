@@ -6,12 +6,12 @@
 	<link rel="stylesheet" th:href="@{/webjars/bootstrap/5.3.0/css/bootstrap.min.css}" />
 </head>
 <body>
-	 <div th:replace="~{layout :: header}"></div>
+	 <div th:replace="~{layout :: header-index}"></div>
 	 
 	 	<div class="cards">
 			<div class="conteiner-fluid">
 				<div class="row" style="margin-left:0; justify-content: center; margin-right:0;">
-					<div class="card" style="width: 18rem;" th:each="cuesEst: ${cuesEstudianteListado}" >
+					<div class="card" style="width: 18rem; margin:5px;" th:each="cuesEst: ${cuesEstudianteListado}" >
 					 	 <div class="card-body">
 						    <h5 class="card-title" th:text="${cuesEst.cuestionario.titulo}"></h5>
 						    <h6 class="card-subtitle mb-2 text-body-secondary" th:text="${cuesEst.estudiante.nombre + ' ' + cuesEst.estudiante.apellido}"></h6>
