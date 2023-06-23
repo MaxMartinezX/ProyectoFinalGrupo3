@@ -42,6 +42,15 @@ public class EstudianteController {
 		return cargaEstudiante;
 	}
 	
+	@GetMapping("/listadoEstudiante")
+	public ModelAndView mostrarEstudiante(){
+		
+		ModelAndView listadoEstudiantes = new ModelAndView("mostrarEstudiantes");
+		listadoEstudiantes.addObject("estudianteListado", unServicio.listarEstudiantes());
+		
+		return listadoEstudiantes;
+	}
+	
 	@PostMapping("/guardarEstudiante")
 	public ModelAndView guardarEstudiante(@Valid @ModelAttribute("nuevoEstudiante") Estudiante nEstudiante, BindingResult resultado) {
 		
@@ -60,7 +69,7 @@ public class EstudianteController {
 		}catch(Exception e) {
 			listadoEstudiantes.addObject("CargadoEstudianteErrorMessage", e.getMessage());
 		}
-		
+				
 		listadoEstudiantes.addObject("estudianteListado", unServicio.listarEstudiantes());
 		
 		return listadoEstudiantes;

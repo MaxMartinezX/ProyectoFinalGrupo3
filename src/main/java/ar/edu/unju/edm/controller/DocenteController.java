@@ -40,6 +40,16 @@ public class DocenteController {
 		return cargaDocente;
 	}
 	
+	@GetMapping("/listadoDocente")
+	public ModelAndView mostrarDocente() {
+		ModelAndView listadoDocentes = new ModelAndView("mostrarDocentes");
+		listadoDocentes.addObject("docenteListado", unDocente);
+		
+		listadoDocentes.addObject("docenteListado",unServicio.listarDocentes());
+		
+		return listadoDocentes;
+	}
+	
 	@PostMapping(value ="/guardarDocente", consumes="multipart/form-data")
 	public ModelAndView guardarDocente(@Valid @ModelAttribute("nuevoDocente") Docente docenteNuevo,@RequestParam("file") MultipartFile[] archivo, BindingResult resultado ){
 		

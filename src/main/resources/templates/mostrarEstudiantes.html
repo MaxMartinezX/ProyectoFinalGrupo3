@@ -14,7 +14,7 @@
 	      <h3>Lista de Estudiantes</h3>
 	    </div>
 	    <div class="col-md-auto">
-	      <button class="btn btn-sm btn-success" th:href="@{/estudiante}">Registrar Nuevo</button>
+	      <a class="btn btn-sm btn-outline-success" th:href="@{/estudiante}">Registrar Nuevo</a>
 	    </div>
 	  </div>
 	</div>
@@ -51,9 +51,9 @@
 			</td>
 			<td th:text="${estudiante.division}"></td>
 			<td>
-				<a th:href="@{|/eliminarEstudiante/${estudiante.id_Estudiante}|}" href="#" class="btn btn-danger">Borrar</a>
+				<a th:href="@{|/eliminarEstudiante/${estudiante.id_Estudiante}|}" class="btn btn-danger">Borrar</a>
 					
-				<a th:href="@{'/modificarEstudiante/'+${estudiante.id_Estudiante}}" href="#" class="btn btn-success" >Editar</a>
+				<a th:href="@{'/modificarEstudiante/'+${estudiante.id_Estudiante}}" class="btn btn-success" >Editar</a>
 			</td>
 		</tr>
 		</table>
