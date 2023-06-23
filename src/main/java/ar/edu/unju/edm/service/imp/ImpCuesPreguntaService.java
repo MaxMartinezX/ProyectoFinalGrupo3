@@ -115,13 +115,16 @@ public class ImpCuesPreguntaService implements ICuesPreguntaService{
 	}
 
 	@Override
-	public Integer obtenerPuntajeTotalDeUnCuestionario(Integer id_cuestionario) {
+	public void obtenerPuntajeTotalDeUnCuestionario(Integer id_cuestionario) {
+		Cuestionario aux= cuestionarioRepository.findById(id_cuestionario).get();
 		Integer puntajeTotal=0;
 		List<Integer> puntajes=ListadoDePuntajes(id_cuestionario);
 		for(int i=0; i <puntajes.size();i++) {
 			puntajeTotal+=puntajes.get(i);
 		}
-		return puntajeTotal;
+		
+		aux.setPuntajeTotal(puntajeTotal);
+		cuestionarioRepository.save(aux);
 	}
 
 	

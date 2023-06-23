@@ -43,6 +43,7 @@ public class CuesEstudianteController {
 	
 	@Autowired
 	CuestionarioRepository cuestionarioRepository;
+
 	
 	
 	
@@ -86,6 +87,7 @@ public class CuesEstudianteController {
 		nuevoCuesEstudiante.setFechaRealizada(cuesEstudianteService.fechaActual());
         nuevoCuesEstudiante.setCuestionario(cuestionarioRepository.findById(idCuestionario).get());
         nuevoCuesEstudiante.setPuntajeObtenido(cuesEstudianteService.calcularPuntajeObtenido(idCuestionario, respuestasSeleccionadas));
+        cuesPreguntasService.obtenerPuntajeTotalDeUnCuestionario(idCuestionario);
         cuesEstudianteService.cargarCuesEstudiante(nuevoCuesEstudiante);
 		}catch(Exception e) {
 			System.out.println(e.getMessage());
