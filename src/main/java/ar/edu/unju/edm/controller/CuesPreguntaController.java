@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import ar.edu.unju.edm.model.CuesPregunta;
+import ar.edu.unju.edm.repository.CuestionarioRepository;
 import ar.edu.unju.edm.service.ICuesPreguntaService;
 import ar.edu.unju.edm.service.ICuestionarioService;
 import ar.edu.unju.edm.service.IPreguntaService;
@@ -27,6 +28,8 @@ public class CuesPreguntaController {
 	ICuestionarioService cuestionarioService;
 	@Autowired
 	CuesPregunta unCuesPregunta;
+	@Autowired
+	CuestionarioRepository cuestionarioRepository;
 	
 	@GetMapping("/cuestionarioPregunta/{id_Cuestionario}")
 	public ModelAndView cargarCuesPregunta(@PathVariable(name="id_Cuestionario") Integer id) {
@@ -43,8 +46,9 @@ public class CuesPreguntaController {
 	@PostMapping("/guardarCuestionarioPregunta/{id_Cuestionario}")
 	public String guardarCuesPregunta(@ModelAttribute("cuesPregunta") CuesPregunta CuestionarioP, @RequestParam("preguntasSeleccionada") List<Integer> preguntasSeleccionadas, @RequestParam("puntajesSeleccionados") List<Integer> puntajesSeleccionados, @PathVariable(name="id_Cuestionario") Integer id) {
 		
-		
+	  
 	  cuesPreguntaService.cargarPreguntasACuestionario(preguntasSeleccionadas, puntajesSeleccionados, id);
+	  cuestionarioRepository.findById(id).get().setPuntajeTotal(cuesPreguntaService.obtenerPuntajeTotalDeUnCuestionario(id));
 		
 		return "redirect:/listadoCuestionarios";
 	}

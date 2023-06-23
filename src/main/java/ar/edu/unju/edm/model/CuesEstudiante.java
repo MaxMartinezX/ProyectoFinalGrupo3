@@ -17,7 +17,7 @@ import jakarta.validation.constraints.NotNull;
 public class CuesEstudiante {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer id_CuesEstudiante;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
