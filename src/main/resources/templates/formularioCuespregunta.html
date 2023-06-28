@@ -24,7 +24,7 @@
 							<input type="checkbox" th:name="'preguntasSeleccionada'" th:value="${pregunta.idPregunta}">
 						</td>
 						<td>
-							<input type="number" th:name="'puntajesSeleccionados'" min="1" max="100">
+							<input type="number" th:name="'puntajesSeleccionados'" value="0" min="0" max="100">
 						</td>
 						<td th:text="${pregunta.pregunta}"></td>
 						<td>

@@ -19,7 +19,7 @@ public class ConfiguracionWeb extends WebSecurityConfigurerAdapter {
 	@Autowired
 	private Autenticacion autenticacion;
 	
-	String[] resources = new String[] { "/include/**","/css/**","/icons/**","/img/**","/imges/**","/js/**","/layer/**", "/webjars/**"};
+	String[] resources = new String[] { "/include/**","/css/**","/icons/**","/img/**","/images/**","/js/**","/layer/**", "/webjars/**"};
 
 	protected void configure(HttpSecurity http) throws Exception{
 		http
@@ -43,7 +43,7 @@ public class ConfiguracionWeb extends WebSecurityConfigurerAdapter {
 		    	.csrf().disable()
 		    .logout()
 		    	.permitAll()
-		    	.logoutSuccessUrl("/login?logout");
+		    	.logoutSuccessUrl("/logout");
 	}
 	
 	BCryptPasswordEncoder bCryptPasswordEncoder;
