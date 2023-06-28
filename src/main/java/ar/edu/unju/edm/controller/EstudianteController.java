@@ -15,7 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import ar.edu.unju.edm.model.Estudiante;
 import ar.edu.unju.edm.service.IEstudianteService;
-import jakarta.validation.Valid;
+import javax.validation.Valid;
 
 @Controller
 public class EstudianteController {
@@ -43,6 +43,24 @@ public class EstudianteController {
 		return cargaEstudiante;
 	}
 	
+	@GetMapping("/listadoEstudiante")
+	public ModelAndView mostrarEstudiante(){
+		
+		ModelAndView listadoEstudiantes = new ModelAndView("mostrarEstudiantes");
+		listadoEstudiantes.addObject("estudianteListado", unServicio.listarEstudiantes());
+		
+		return listadoEstudiantes;
+	}
+	
+	@GetMapping("/listaDeEstudiantes")
+	public ModelAndView mostrarEstudiantes(){
+		
+		ModelAndView listaDeEstudiantes = new ModelAndView("listaDeEstudiantes");
+		listaDeEstudiantes.addObject("estudianteListado", unServicio.listarEstudiantes());
+		
+		return listaDeEstudiantes;
+	}
+	
 	@PostMapping("/guardarEstudiante")
 	public ModelAndView guardarEstudiante(@Valid @ModelAttribute("nuevoEstudiante") Estudiante nEstudiante, BindingResult resultado) {
 		
@@ -63,7 +81,7 @@ public class EstudianteController {
 			listadoEstudiantes.addObject("CargadoEstudianteErrorMessage", e.getMessage());
 			GRUPO3.error(e);
 		}
-		
+				
 		listadoEstudiantes.addObject("estudianteListado", unServicio.listarEstudiantes());
 		
 		return listadoEstudiantes;
