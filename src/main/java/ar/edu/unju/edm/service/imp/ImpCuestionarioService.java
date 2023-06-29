@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import ar.edu.unju.edm.model.Cuestionario;
@@ -44,8 +45,25 @@ public class ImpCuestionarioService implements ICuestionarioService {
 
 	@Override
 	public ArrayList<Cuestionario> listarCuestionarios() {
-		return (ArrayList<Cuestionario>) cuestionarioRepository.findByEstado(true);
-	}
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		
+		    Object principal = authentication.getPrincipal();
+		    UserDetails entidadAutenticada= null;
+		    // Verificar si el objeto principal es una instancia de la entidad que deseas guardar
+		    if (principal instanceof UserDetails) {
+		        entidadAutenticada = (UserDetails) principal;
+		    }
+		    
+		    ArrayList<Cuestionario> cuestionarios = (ArrayList<Cuestionario>) cuestionarioRepository.findAll();
+	        ArrayList<Cuestionario> cuestionariosDeDocente= new ArrayList<>();
+		    
+		        for(int i=0; i<cuestionarios.size();i++) {
+		        	if(cuestionarios.get(i).getDocente().getId_Docente()==Integer.parseInt(entidadAutenticada.getUsername())){
+		        		cuestionariosDeDocente.add(cuestionarios.get(i));
+		        	}
+		        }
+		        return cuestionariosDeDocente;
+}
 
 	@Override
 	public void eliminarTodosLosCuestionarios() {

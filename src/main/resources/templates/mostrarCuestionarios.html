@@ -7,20 +7,28 @@
 </head>
 <body>
 <div th:replace="~{layout :: header}"></div>
+	<div class="container-fluid">
+	  <div class="row justify-content-between mb-3">
+	    <div class="col-md-auto">
+	      <h3>Lista de Cuestionarios</h3>
+	    </div>
+	    <div class="col-md-auto">
+	      <a class="btn btn-sm btn-outline-success" th:href="@{/cuestionario}">Registrar Nuevo</a>
+	    </div>
+	  </div>
+	</div>
 <div class="container col-8">
 	<table class="table table-striped-columns">
 	<tr>
 		<th>Código</th>
 		<th>Título</th>
 		<th>Descripción</th>
-		<th>Docente</th>
 		<th>Edición</th>
 	</tr>
 	<tr th:each="cuestionario : ${cuestionarioListado}">
 	 	<td th:text="${cuestionario.id_Cuestionario}"></td>
 	  	<td th:text="${cuestionario.titulo}"></td>
 	  	<td th:text="${cuestionario.descripcion}"></td>
-	  	<!--<td th:text="${cuestionario.docente.nombre + cuestionario.docente.apellido}"></td> -->
 	 	<td>
 	 		<a class="btn btn-primary" th:href="@{'/cuestionarioPregunta/' + ${cuestionario.id_Cuestionario}}">Añadir preguntas</a>
 		</td>

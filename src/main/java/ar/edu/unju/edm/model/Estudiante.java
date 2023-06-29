@@ -27,8 +27,6 @@ public class Estudiante {
 	@NotBlank(message="nombre is required")
 	@Size(max=30)
 	private String nombre;
-	@Size(min=4, max=16, message="La contraseña debe tener entre 4 y 16 caracteres")
-	private String contrasenia;
 	@NotNull(message="dni is required")
 	@Min(value=8)
 	private Integer dni;
@@ -48,14 +46,15 @@ public class Estudiante {
 		// TODO Auto-generated constructor stub
 	}
 
-
-	public Estudiante(Integer id_Estudiante, String apellido, String nombre, String contrasenia, Integer dni, String telefono,
-			String correo, short curso, char division, String direccion, Boolean estado) {
+	public Estudiante(Integer id_Estudiante,
+			@NotBlank(message = "apellido is required") @Size(max = 20) String apellido,
+			@NotBlank(message = "nombre is required") @Size(max = 30) String nombre,
+			@NotNull(message = "dni is required") @Min(8) Integer dni, String telefono, @Email String correo,
+			@NotNull(message = "curso is required") short curso, char division, String direccion, Boolean estado) {
 		super();
 		this.id_Estudiante = id_Estudiante;
 		this.apellido = apellido;
 		this.nombre = nombre;
-		this.contrasenia = contrasenia;
 		this.dni = dni;
 		this.telefono = telefono;
 		this.correo = correo;
@@ -64,17 +63,6 @@ public class Estudiante {
 		this.direccion = direccion;
 		this.estado = estado;
 	}
-
-
-	public String getContrasenia() {
-		return contrasenia;
-	}
-
-
-	public void setContrasenia(String contrasenia) {
-		this.contrasenia = contrasenia;
-	}
-
 
 	public Integer getId_Estudiante() {
 		return id_Estudiante;
