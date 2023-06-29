@@ -24,7 +24,7 @@
 							<input type="checkbox" th:name="'preguntasSeleccionada'" th:value="${pregunta.idPregunta}">
 						</td>
 						<td>
-							<input type="number" th:name="'puntajesSeleccionados'" value="0" min="0" max="100">
+							<input type="number" th:name="'puntajesSeleccionados'" name="puntajesSeleccionados" min="0" max="100">
 						</td>
 						<td th:text="${pregunta.pregunta}"></td>
 						<td>
@@ -48,15 +48,7 @@
 				<button class="btn btn-primary" type="submit">Añadir preguntas</button>
 			</form>
 			<script>
-				document.getElementById("miFormulario").addEventListener("submit", function() {
-					var checkboxes = document.getElementsByName("preguntasSeleccionada");
-					var puntajes = document.getElementsByName("puntajesSeleccionados");
-					for (var i = 0; i < checkboxes.length; i++) {
-						if (!checkboxes[i].checked) {
-							puntajes[i].remove();
-						}
-					}
-				});
+							
 			</script>
 		</div>
 	</div>

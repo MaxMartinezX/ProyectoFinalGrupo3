@@ -127,5 +127,19 @@ public class ImpCuesPreguntaService implements ICuesPreguntaService{
 		cuestionarioRepository.save(aux);
 	}
 
+
+	@Override
+	public List<Integer> depurarPuntajesNoSeleccionados(List<Integer> puntajesSeleccionados) {
+		// Asignar 0 a los puntajes de las preguntas no seleccionadas
+	    List<Integer> puntajesDepurados = new ArrayList<>();
+	    
+	    for (int i = 0; i < puntajesSeleccionados.size(); i++) {
+	        if(puntajesSeleccionados.get(i) != null) {
+	        	puntajesDepurados.add(puntajesSeleccionados.get(i));
+	        }
+	    }
+		return puntajesDepurados;
+	}
+
 	
 }
