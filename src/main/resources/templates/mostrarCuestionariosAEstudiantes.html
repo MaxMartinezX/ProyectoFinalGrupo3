@@ -13,7 +13,7 @@
 	<div class="card" style="width: 18rem; margin: 7px;" th:each="cuestionario : ${cuestionarios}" >
 	  <div class="card-body">
 	    <h5 class="card-title" th:text="${cuestionario.titulo}"></h5>
-	    <h6 class="card-subtitle mb-2 text-body-secondary" th:text="${cuestionario.docente.nombre + cuestionario.docente.apellido}"></h6>
+	    <!--<h6 class="card-subtitle mb-2 text-body-secondary" th:text="${cuestionario.docente.nombre + cuestionario.docente.apellido}"></h6>-->
 	    <p class="card-text" th:text="${cuestionario.descripcion}" ></p>
 	    <a class="btn btn-primary" th:href="@{'/resolverCuestionario/' + ${cuestionario.id_Cuestionario}}" >Resolver</a>
 	  </div>
