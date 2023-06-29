@@ -11,34 +11,34 @@
 	<h4>Registro Nueva Pregunta</h4>
 	<div>
 	<form th:object="${nuevaPregunta}" th:action="${band}?@{/preguntaModificada}:@{/guardarPregunta}" method="post">
-	<div>
+	<div class="row g-3">
 		<input type="hidden" class="form-control" th:if="${band}" th:field="*{idPregunta}">
 		<div class="mb-e">
 		    <label>Pregunta</label>
 		    <input type="text" th:field="*{pregunta}" class="form-control" required/>
 		</div>
 		
-		<div class="mb-e">
+		<div class="col-md-6">
 		    <label>Opción 1</label>
 		    <input type="text" th:field="*{opcion1}" class="form-control" required/>
 		</div>
 		
-		<div class="mb-e">
+		<div class="col-md-6">
 		    <label>Opción 2</label>
 		    <input type="text" th:field="*{opcion2}" class="form-control" required/>
 		</div>
 		
-		<div class="mb-e">
+		<div class="col-md-6">
 		    <label>Opción 3</label>
 		    <input type="text" th:field="*{opcion3}" class="form-control" required/>
 		</div>
 		
-		<div class="mb-e">
+		<div class="col-md-6">
 		    <label>Opción 4</label>
 		    <input type="text" th:field="*{opcion4}" class="form-control" required/>
 		</div>
 		
-		<div class="mb-e">
+		<div class="col-md-6">
             <label class="form-label">Opción Correcta</label>
             <select th:field="*{opcionCorrecta}" class="form-control" required>
                 <option th:value="1">Primera</option>
@@ -48,7 +48,7 @@
             </select>
         </div>
         
-        <div class="mb-e">
+        <div class="col-md-6">
             <label class="form-label">Dificultad</label>
             <select th:field="*{dificultad}" class="form-control" required>
                 <option th:value="1">Fácil</option>
