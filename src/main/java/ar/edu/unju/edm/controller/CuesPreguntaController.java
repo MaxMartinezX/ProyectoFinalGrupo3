@@ -51,8 +51,11 @@ public class CuesPreguntaController {
 	@PostMapping("/guardarCuestionarioPregunta/{id_Cuestionario}")
 	public String guardarCuesPregunta(@ModelAttribute("cuesPregunta") CuesPregunta CuestionarioP, @RequestParam("preguntasSeleccionada") List<Integer> preguntasSeleccionadas, @RequestParam("puntajesSeleccionados") List<Integer> puntajesSeleccionados, @PathVariable(name="id_Cuestionario") Integer id) {
 		
-		GRUPO3.warn("Guardando preguntas al Cuestionario");
-	  cuesPreguntaService.cargarPreguntasACuestionario(preguntasSeleccionadas, puntajesSeleccionados, id);
+		GRUPO3.warn("PUNTAJESSSSSSSSSSSSSSSSSS");
+		GRUPO3.warn(puntajesSeleccionados);
+		GRUPO3.warn(preguntasSeleccionadas);
+		
+	  cuesPreguntaService.cargarPreguntasACuestionario(preguntasSeleccionadas, cuesPreguntaService.depurarPuntajesNoSeleccionados(puntajesSeleccionados), id);
 		
 		return "redirect:/listadoCuestionarios";
 	}

@@ -18,4 +18,6 @@ public interface ICuesPreguntaService {
 	public List<Integer> ListadoDePuntajes (Integer id_Cuestionario);
 	public List<Pregunta> ListarPreguntasNoSeleccionadas(List<Pregunta> seleccionadas, List<Pregunta> todasLasPreguntas);
 	public void obtenerPuntajeTotalDeUnCuestionario(Integer id_cuestionario);
+	
+	public List<Integer> depurarPuntajesNoSeleccionados(List<Integer> puntajesSeleccionados);
 }
