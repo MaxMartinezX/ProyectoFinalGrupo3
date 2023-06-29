@@ -83,6 +83,10 @@ public class Docente {
 	public Integer getId_Docente() {
 		return id_Docente;
 	}
+	
+	public void setId_Docente(Integer id_Docente) {
+		this.id_Docente=id_Docente;
+	}
 
 	public String getNombre() {
 		return nombre;

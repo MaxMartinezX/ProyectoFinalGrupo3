@@ -3,6 +3,9 @@ package ar.edu.unju.edm.controller;
 import org.apache.juli.logging.Log;
 import org.apache.juli.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,6 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import ar.edu.unju.edm.model.Cuestionario;
+import ar.edu.unju.edm.model.Docente;
 import ar.edu.unju.edm.service.ICuesPreguntaService;
 import ar.edu.unju.edm.service.ICuestionarioService;
 import ar.edu.unju.edm.service.IDocenteService;
@@ -37,7 +41,6 @@ public class CuestionarioController {
 	public ModelAndView cargarCuestionario() {
 		ModelAndView cargaCuestionario = new ModelAndView("formularioCuestionario");
 		cargaCuestionario.addObject("nuevoCuestionario", unCuestionario);
-		cargaCuestionario.addObject("listadoDocentes", docenteService.listarDocentes());
 	    GRUPO3.warn("Cargando nuevo cuestionario");
 		return cargaCuestionario;
 	}
@@ -53,7 +56,21 @@ public class CuestionarioController {
 		ModelAndView listadoCuestionarios = new ModelAndView("mostrarCuestionarios");
 		
 			GRUPO3.warn("Mostrando nuevo Cuestionario"+unCuestionario.getId_Cuestionario());
-		
+			Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+			
+			if (authentication != null && authentication.isAuthenticated()) {
+			    // Obtener los detalles del usuario actualmente autenticado
+			    Object principal = authentication.getPrincipal();
+			
+			    // Verificar si el objeto principal es una instancia de la entidad que deseas guardar
+			    if (principal instanceof UserDetails) {
+			        UserDetails entidadAutenticada = (UserDetails) principal;
+			    
+			        unCuestionario.setDocente(docenteService.mostrarUnDocente(Integer.parseInt(entidadAutenticada.getUsername())));
+			        
+			    }
+			}
+			
 		try {
 			cuestionarioService.cargarCuestionario(unCuestionario);
 		}catch(Exception e) {
