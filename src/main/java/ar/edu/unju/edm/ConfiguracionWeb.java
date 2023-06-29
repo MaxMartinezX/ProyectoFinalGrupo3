@@ -25,7 +25,7 @@ public class ConfiguracionWeb extends WebSecurityConfigurerAdapter {
 		http
 		    .authorizeRequests()
 		    .antMatchers(resources).permitAll()
-		    .antMatchers("/","index","/login","/home","/principal","/elegirCuestionario","/resolverCuestionario/{id_Cuestionario}","/resultadoDeCuestionario/{id_Cuestionario}","/cuestionariosRealizados","/listaDeEstudiantes","/listaDeDocentes").permitAll()
+		    .antMatchers("/","index","/login","/home","/elegirCuestionario","/resolverCuestionario/{id_Cuestionario}","/resultadoDeCuestionario/{id_Cuestionario}","/cuestionariosRealizados","/listaDeEstudiantes","/listaDeDocentes").permitAll()
 		    
 		    //saquen de comentarios este para que puedan crear un docente con contraseña y luego dejen el que estaba
 		    //.antMatchers("/","index","/docente","/guardarDocente","/login","/home","/principal","/elegirCuestionario","/resolverCuestionario/{id_Cuestionario}","/resultadoDeCuestionario/{id_Cuestionario}","/cuestionariosRealizados","/listaDeEstudiantes","/listaDeDocentes").permitAll()
