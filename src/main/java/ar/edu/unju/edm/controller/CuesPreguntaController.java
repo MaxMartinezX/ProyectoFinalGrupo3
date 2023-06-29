@@ -1,6 +1,8 @@
 package ar.edu.unju.edm.controller;
 
+import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.juli.logging.Log;
 import org.apache.juli.logging.LogFactory;
@@ -49,13 +51,14 @@ public class CuesPreguntaController {
 	}
 	
 	@PostMapping("/guardarCuestionarioPregunta/{id_Cuestionario}")
-	public String guardarCuesPregunta(@ModelAttribute("cuesPregunta") CuesPregunta CuestionarioP, @RequestParam("preguntasSeleccionada") List<Integer> preguntasSeleccionadas, @RequestParam("puntajesSeleccionados") List<Integer> puntajesSeleccionados, @PathVariable(name="id_Cuestionario") Integer id) {
+	public String guardarCuesPregunta(@ModelAttribute("cuesPregunta") CuesPregunta CuestionarioP, @RequestParam("preguntasSeleccionada") List<Integer> preguntasSeleccionadas, @RequestParam Map<Integer,Integer> puntajesSeleccionados, @PathVariable(name="id_Cuestionario") Integer id) {
 		
+		System.out.println(puntajesSeleccionados);
 		GRUPO3.warn("PUNTAJESSSSSSSSSSSSSSSSSS");
 		GRUPO3.warn(puntajesSeleccionados);
 		GRUPO3.warn(preguntasSeleccionadas);
 		
-	  cuesPreguntaService.cargarPreguntasACuestionario(preguntasSeleccionadas, cuesPreguntaService.depurarPuntajesNoSeleccionados(puntajesSeleccionados), id);
+	  cuesPreguntaService.cargarPreguntasACuestionario(preguntasSeleccionadas, puntajesSeleccionados, id);
 		
 		return "redirect:/listadoCuestionarios";
 	}

@@ -2,6 +2,7 @@ package ar.edu.unju.edm.service.imp;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,14 +34,18 @@ public class ImpCuesPreguntaService implements ICuesPreguntaService{
 	}
 	
 	@Override
-	public void cargarPreguntasACuestionario (List<Integer> preguntasSeleccionadas,List<Integer> puntajesSeleccionados, Integer id_Cuestionario){
+	public void cargarPreguntasACuestionario (List<Integer> preguntasSeleccionadas,Map<Integer,Integer> puntajesSeleccionados, Integer id_Cuestionario){
 		
 		cuesPreguntaRepository.deleteAll(cuesPreguntaRepository.findAllByCuestionario(cuestionarioRepository.findById(id_Cuestionario).get()));
 			
 		for(int i=0;i<preguntasSeleccionadas.size();i++) {
 			CuesPregunta auxiliar= new CuesPregunta();
 			auxiliar.setPregunta(preguntaRepository.findById(preguntasSeleccionadas.get(i)).get());
-			auxiliar.setPuntaje(puntajesSeleccionados.get(i));
+			if ( puntajesSeleccionados.get(preguntasSeleccionadas.get(i)) == null ) {
+				puntajesSeleccionados.put(preguntasSeleccionadas.get(i), 0);
+			}
+			System.out.println(puntajesSeleccionados.get(preguntasSeleccionadas.get(i)));
+			auxiliar.setPuntaje(puntajesSeleccionados.get(preguntasSeleccionadas.get(i)));
 			auxiliar.setCuestionario(cuestionarioRepository.findById(id_Cuestionario).get());
 			
 			cuesPreguntaRepository.save(auxiliar);
