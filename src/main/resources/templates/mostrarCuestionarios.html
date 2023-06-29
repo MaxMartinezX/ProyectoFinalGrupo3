@@ -20,7 +20,7 @@
 	 	<td th:text="${cuestionario.id_Cuestionario}"></td>
 	  	<td th:text="${cuestionario.titulo}"></td>
 	  	<td th:text="${cuestionario.descripcion}"></td>
-	  	<td th:text="${cuestionario.docente.nombre + cuestionario.docente.apellido}"></td>
+	  	<!--<td th:text="${cuestionario.docente.nombre + cuestionario.docente.apellido}"></td> -->
 	 	<td>
 	 		<a class="btn btn-primary" th:href="@{'/cuestionarioPregunta/' + ${cuestionario.id_Cuestionario}}">Añadir</a>
 			<button class="btn btn-primary">Modificar</button>

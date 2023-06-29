@@ -19,13 +19,13 @@
 			    <label>Descripción</label>
 			    <textarea type="text" th:field="*{descripcion}" class="form-control" rows="3" required></textarea><br/>
 			</div>
-			<div class="mb-e">
+			<!--<div class="mb-e">
 	            <label class="form-label">Docente Encargado</label>
 	            <select th:field="*{docente}" class="form-control" required><br/>
 	                <option value="">Seleccionar docente...</option>
 	                <option th:each="doc : ${listadoDocentes}" th:value="${doc.id_Docente}" th:text="${doc.nombre + ' ' + doc.apellido}"></option>
 	            </select>
-	        </div>
+	        </div> -->
 	    </div></br>
 			<button class="btn btn-primary" type="submit">Crear</button>
 		</form>

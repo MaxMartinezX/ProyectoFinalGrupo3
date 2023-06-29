@@ -4,9 +4,12 @@ import java.util.ArrayList;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import ar.edu.unju.edm.model.Cuestionario;
+import ar.edu.unju.edm.model.Docente;
 import ar.edu.unju.edm.repository.CuestionarioRepository;
 import ar.edu.unju.edm.service.ICuestionarioService;
 
@@ -19,6 +22,7 @@ public class ImpCuestionarioService implements ICuestionarioService {
 	@Override
 	public void cargarCuestionario(Cuestionario unCuestionario) {
 		unCuestionario.setEstado(true);
+		
 		cuestionarioRepository.save(unCuestionario);
 		
 	}
