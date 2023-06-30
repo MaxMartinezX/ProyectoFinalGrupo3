@@ -50,6 +50,14 @@ public class CuesEstudianteController {
 	@GetMapping("/elegirCuestionario")
 	public ModelAndView cargarCuesEstudiante () {
 		ModelAndView cargaCuesEstudiante = new ModelAndView("mostrarCuestionariosAEstudiantes");
+		cargaCuesEstudiante.addObject("cuestionarios", cuestionarioService.listarCuestionariosTodos());
+		GRUPO3.warn("Elegir Cuestionario");
+		return cargaCuesEstudiante;
+	}
+	
+	@GetMapping("/elegirCuestionarioDocente")
+	public ModelAndView cargarCuesEstudianteParaDocente () {
+		ModelAndView cargaCuesEstudiante = new ModelAndView("mostrarCuestionariosParaResolverDocente");
 		cargaCuesEstudiante.addObject("cuestionarios", cuestionarioService.listarCuestionarios());
 		GRUPO3.warn("Elegir Cuestionario");
 		return cargaCuesEstudiante;
@@ -104,6 +112,16 @@ public class CuesEstudianteController {
 	public ModelAndView guardarCuesEstudiante () {
 		GRUPO3.warn("Listando todos los Cuestionarios");
 		ModelAndView listadoCuesEstudiante = new ModelAndView("mostrarCuestionariosResueltos");
+		
+		listadoCuesEstudiante.addObject("cuesEstudianteListado", cuesEstudianteService.listarTodosCuestionariosEstudiantes() );
+		
+		return listadoCuesEstudiante;
+	}
+	
+	@GetMapping("/cuestionariosRealizadosDocentes")
+	public ModelAndView guardarCuesEstudianteDocentes () {
+		GRUPO3.warn("Listando todos los Cuestionarios");
+		ModelAndView listadoCuesEstudiante = new ModelAndView("mostrarCuestionariosResueltosDocente");
 		
 		listadoCuesEstudiante.addObject("cuesEstudianteListado", cuesEstudianteService.listarTodosCuestionariosEstudiantes() );
 		

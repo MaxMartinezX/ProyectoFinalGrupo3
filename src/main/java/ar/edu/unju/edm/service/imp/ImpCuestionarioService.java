@@ -64,6 +64,11 @@ public class ImpCuestionarioService implements ICuestionarioService {
 		        }
 		        return cuestionariosDeDocente;
 }
+	
+	@Override
+	public ArrayList<Cuestionario> listarCuestionariosTodos() {
+		        return (ArrayList<Cuestionario>) cuestionarioRepository.findAll();
+}
 
 	@Override
 	public void eliminarTodosLosCuestionarios() {

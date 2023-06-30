@@ -14,6 +14,7 @@ public interface ICuestionarioService {
 	public void eliminarCuestionario(Integer idCuestionario);
 	public Cuestionario mostrarUnCuestionario(Integer idCuestionario);
 	public ArrayList<Cuestionario> listarCuestionarios();
+	public ArrayList<Cuestionario> listarCuestionariosTodos();
 	public void eliminarTodosLosCuestionarios();
 
 
